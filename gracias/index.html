@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ivy · Mensaje enviado</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌺</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #0a0a0a; --page: #120b19; --slab: #1e0f33; --paper: #fbf3ff; --soft: #c8b3e8; --pink: #ff2e93; --violet: #7b2ff0; --display: "Rubik Mono One", "Arial Black", Impact, sans-serif; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; background: var(--page); color: var(--paper); font: 400 17px/1.55 "DM Sans", system-ui, sans-serif;
+    background-image: radial-gradient(rgba(255, 46, 147, .07) 1px, transparent 1.3px); background-size: 6px 6px; }
+  .card { max-width: 520px; width: 100%; background: var(--slab); border: 3px solid var(--ink); border-radius: 16px; padding: 28px 24px; box-shadow: 8px 8px 0 var(--violet); transform: rotate(-1deg); }
+  h1 { font-family: var(--display); font-weight: 400; font-size: clamp(26px, 7vw, 40px); line-height: 1.05; margin: 0 0 14px; color: var(--pink); text-transform: uppercase; }
+  p { color: var(--soft); margin: 0 0 22px; }
+  a { display: inline-block; padding: 12px 18px; border-radius: 12px; font-weight: 700; text-decoration: none; border: 3px solid var(--ink); background: var(--pink); color: var(--ink); box-shadow: 5px 5px 0 var(--violet); }
+  a:focus-visible { outline: 3px solid #ffe066; outline-offset: 2px; }
+  html:not([lang="en"]) [data-en], html[lang="en"] [data-es] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1><span data-es>Recibido, mor.</span><span data-en>Got it.</span></h1>
+  <p data-es>Se ha abierto tu correo con el mensaje escrito: dale a enviar y nos llega. Te contestamos normalmente en un par de días.</p>
+  <p data-en>Your email app opened with the message written: hit send and it reaches us. We usually answer within a couple of days.</p>
+  <a href="../"><span data-es>Volver a Ivy</span><span data-en>Back to Ivy</span></a>
+</div>
+<script>
+  let l = null
+  try { l = localStorage.getItem('ivy-site-lang') } catch {}
+  document.documentElement.lang = l || ((navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en')
+</script>
+</body>
+</html>

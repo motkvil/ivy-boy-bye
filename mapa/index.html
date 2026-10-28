@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌺</text></svg>">
+<style>[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Mapa de Ivy</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  /* Layout: Ivy's brand manual (docs/anatomia-y-manual.html). A mind map of where Ivy's data comes in, where it is
+     kept, how it is looked after and where it goes out, with a reading panel; then the route of seven real pieces of
+     data, then the rules of who decides over them. Single dark look on purpose. */
+  :root {
+    --ink: #120b19;
+    --slab: #1e0f33;
+    --slab-2: #2a1548;
+    --rule: #3d2266;
+    --paper: #fbf3ff;
+    --soft: #c8b3e8;
+    --pink: #ff2e93;
+    --violet: #7b2ff0;
+    --yellow: #ffe066;
+    --green: #8cff6b;
+    /* branch colours: what comes in is yours (paper), what goes out is what Ivy says and does (violet),
+       what is kept is what matters (yellow), how it is looked after is Ivy's own rules (pink) */
+    --in: #fbf3ff;
+    --out: #a777ff;
+    --keep: #ffe066;
+    --admin: #ff2e93;
+    --display: "Rubik Mono One", "Arial Black", Impact, sans-serif;
+    --body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ink);
+    background-image: radial-gradient(rgba(255, 46, 147, .07) 1px, transparent 1.3px);
+    background-size: 6px 6px;
+    color: var(--paper);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.55;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 0 64px;
+  }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: #000; }
+  .topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; margin: 0 calc(-1 * max(16px, env(safe-area-inset-right, 0px))) 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px))); background: #000; border-bottom: 3px solid var(--pink); }
+  .topbar-in { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 16px; padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .wordmark { font-family: var(--display); font-size: 22px; color: var(--pink); }
+  .topbar .where { margin-left: auto; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--paper); padding: 7px 12px; border: 2px solid var(--rule); border-radius: 8px; }
+  .wrap { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; padding-top: 28px; }
+  h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; text-wrap: balance; letter-spacing: .01em; }
+  h1 { font-size: clamp(30px, 7vw, 62px); line-height: 1; }
+  h1 span { color: var(--pink); }
+  h2 { font-size: clamp(20px, 3.6vw, 30px); line-height: 1.1; }
+  .tag { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--pink); }
+  .lede { max-width: 64ch; color: var(--soft); margin: 0; font-size: 17px; }
+  header, section { display: flex; flex-direction: column; gap: 16px; }
+  .sec-head { display: flex; flex-direction: column; gap: 8px; }
+  .sec-head p { margin: 0; color: var(--soft); max-width: 64ch; }
+  a { color: var(--yellow); }
+  a:focus-visible, .node:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; }
+  .legend span { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; letter-spacing: .04em; padding: 5px 10px; border-radius: 8px; background: var(--slab); border: 2px solid #000; }
+  .legend i { width: 12px; height: 12px; border-radius: 3px; border: 2px solid #000; display: inline-block; }
+
+  /* ---------- the mind map ---------- */
+  .map { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .map .panel { max-width: 760px; }
+  .board { overflow-x: auto; background: #0d0814; border: 3px solid #000; border-radius: 16px; box-shadow: 7px 7px 0 var(--violet); }
+  .board svg { display: block; width: 100%; min-width: 760px; height: auto; }
+  .link { fill: none; stroke-width: 3; stroke-linecap: round; opacity: .55; }
+  .link.on { opacity: 1; stroke-width: 4; }
+  .node { cursor: pointer; outline: none; }
+  .node .shadow { fill: #000; }
+  .node .face { fill: var(--slab); stroke: #000; stroke-width: 3; transition: fill .15s; }
+  .node:hover .face { fill: var(--slab-2); }
+  .node[aria-pressed="true"] .face { fill: var(--c); }
+  .node text { fill: var(--paper); font-family: var(--body); font-weight: 700; font-size: 15px; }
+  .node .sub { fill: var(--soft); font-family: var(--mono); font-weight: 400; font-size: 11px; letter-spacing: .03em; }
+  .node[aria-pressed="true"] text, .node[aria-pressed="true"] .sub { fill: #0d0814; }
+  .node.branch .face { fill: #000; stroke: var(--c); stroke-width: 3; }
+  .node.branch text { fill: var(--c); font-family: var(--display); font-weight: 400; font-size: 17px; letter-spacing: .03em; }
+  .node.branch .sub { fill: var(--soft); font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; }
+  .node.branch[aria-pressed="true"] .face { fill: var(--c); stroke: #000; }
+  .node.branch[aria-pressed="true"] text, .node.branch[aria-pressed="true"] .sub { fill: #0d0814; }
+  .core circle { fill: var(--pink); stroke: #000; stroke-width: 4; }
+  .core .name { fill: #0d0814; font-family: var(--display); font-size: 38px; }
+  .core .who { fill: #0d0814; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .06em; }
+
+  .panel { background: var(--slab); border: 3px solid #000; border-radius: 16px; box-shadow: 7px 7px 0 var(--pink); padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .panel .kind { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--c, var(--pink)); }
+  .panel h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 22px; line-height: 1.15; }
+  .panel .say { margin: 0; color: var(--yellow); font-weight: 500; }
+  .panel ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+  .panel li::marker { color: var(--c, var(--pink)); }
+  .label { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); }
+  .route { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .route span { font-size: 13px; padding: 4px 9px; border-radius: 6px; background: var(--ink); border: 1px solid var(--rule); }
+  .route b { color: var(--pink); font-family: var(--mono); }
+  .files { display: flex; flex-wrap: wrap; gap: 6px; }
+  .file { font-family: var(--mono); font-size: 12.5px; padding: 3px 9px; border-radius: 6px; background: var(--ink); border: 1px solid var(--rule); overflow-wrap: anywhere; }
+  .nums { display: flex; flex-wrap: wrap; gap: 8px; }
+  .num { background: var(--slab-2); border: 2px solid #000; border-radius: 10px; box-shadow: 3px 3px 0 #000; padding: 8px 12px; display: flex; flex-direction: column; min-width: 92px; }
+  .num b { font-family: var(--mono); font-size: 20px; color: var(--pink); font-variant-numeric: tabular-nums; }
+  .num span { font-size: 12px; color: var(--soft); }
+  .hint { font-family: var(--mono); font-size: 12px; color: var(--soft); margin: 0; }
+
+  /* ---------- route of real data ---------- */
+  .table-wrap { overflow-x: auto; border: 3px solid #000; border-radius: 16px; box-shadow: 7px 7px 0 var(--violet); background: var(--slab); }
+  table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 14.5px; }
+  th { text-align: left; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; padding: 12px 14px; background: #000; }
+  th.in { color: var(--in); } th.out { color: var(--out); } th.keep { color: var(--keep); } th.admin { color: var(--admin); }
+  td { padding: 12px 14px; border-top: 1px solid var(--rule); vertical-align: top; color: var(--soft); }
+  td:first-child { color: var(--paper); font-weight: 700; }
+  td code { font-family: var(--mono); font-size: 12.5px; color: var(--yellow); }
+
+  /* ---------- who decides ---------- */
+  .rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .rule { border-left: 6px solid var(--c); background: var(--slab); border-radius: 0 12px 12px 0; padding: 12px 16px; display: flex; flex-direction: column; gap: 4px; }
+  .rule b { font-size: 15.5px; }
+  .rule span { font-size: 14px; color: var(--soft); }
+
+  footer { color: var(--soft); font-size: 13px; font-family: var(--mono); display: flex; flex-wrap: wrap; gap: 6px 16px; }
+
+  @media (prefers-reduced-motion: reduce) { .node .face { transition: none; } }
+</style>
+
+<div class="topbar"><div class="topbar-in">
+  <span class="wordmark" aria-hidden="true">IVY</span>
+  <a class="where" href="../anatomia/">Anatomía y manual ↗</a>
+</div></div>
+
+<div class="wrap">
+  <header>
+    <span class="tag">Mapa de datos · cifras de ejemplo</span>
+    <h1>Mapa de <span>Ivy</span></h1>
+    <p class="lede">Cómo entra la información en Ivy, dónde se guarda, cómo se cuida y por dónde sale. Toca cualquier rama o nodo del mapa para ver qué es, de dónde viene y a dónde va. La Anatomía cuenta cómo está hecha Ivy por dentro; este mapa cuenta qué pasa con tus datos.</p>
+    <div class="legend" aria-label="Leyenda de colores">
+      <span><i style="background:var(--in)"></i>Entra: lo tuyo y lo de fuera</span>
+      <span><i style="background:var(--out)"></i>Sale: lo que Ivy dice y hace</span>
+      <span><i style="background:var(--keep)"></i>Se guarda: lo que importa</span>
+      <span><i style="background:var(--admin)"></i>Se cuida: las reglas de Ivy</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="h-map">
+    <div class="sec-head"><span class="tag">El mapa</span><h2 id="h-map">Todo pasa por Ivy</h2></div>
+    <div class="map">
+      <div class="board"><svg id="mind" viewBox="0 0 1000 760" role="group" aria-label="Mapa mental de los datos de Ivy"></svg></div>
+      <article class="panel" id="panel" aria-live="polite"></article>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-route">
+    <div class="sec-head">
+      <span class="tag">Ruta de un dato</span>
+      <h2 id="h-route">Siete datos, de principio a fin</h2>
+      <p>Lo que le pasa a cada tipo de información desde que la cuentas hasta que vuelve a ti.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Dato</th><th class="in">Entra por</th><th class="admin">Ivy lo trata</th><th class="keep">Se guarda en</th><th class="out">Sale a</th></tr></thead>
+        <tbody>
+          <tr><td>"Marta me prestó 20 €"</td><td>Tu mensaje</td><td>Lo apunta como dato tuyo y como nota de Marta</td><td><code>parts/profile</code> y <code>circle-ivy-sync.json</code></td><td>Su memoria, la ficha de Marta en Circle ("Lo que Ivy sabe") y Economía si es deuda</td></tr>
+          <tr><td>Un gasto: "cena 25 €"</td><td>Tu mensaje o la app Economía</td><td>Herramienta de dinero, con botón de deshacer</td><td><code>ivy-economia.json</code></td><td>Economía, la tarjeta <code>&lt;&lt;money&gt;&gt;</code> del chat y el presupuesto</td></tr>
+          <tr><td>"He comprado leche"</td><td>Tu mensaje o la app Despensa</td><td>Suma a la despensa y tacha la lista de la compra</td><td><code>ivy-despensa.json</code></td><td>Despensa, la tarjeta <code>&lt;&lt;pantry&gt;&gt;</code> y avisos de caducidad</td></tr>
+          <tr><td>"El jueves al médico"</td><td>Tu mensaje</td><td>Crea el evento; si lo pides, con aviso</td><td>Google Calendar</td><td>Tu calendario, el aviso en el móvil y la tarjeta <code>&lt;&lt;week&gt;&gt;</code></td></tr>
+          <tr><td>Un fallo de inglés</td><td>Tu mensaje</td><td>Claude lo corrige; Ivy cuenta los que repites</td><td><code>convs/…</code> y <code>parts/mistakes</code></td><td>Barra de corrección, Mis errores, práctica y chisme semanal</td></tr>
+          <tr><td>Una palabra nueva</td><td>La respuesta de Ivy o tu "¿qué significa…?"</td><td>La subraya y la mete en el libro</td><td><code>parts/slang</code> (en trozos si crece)</td><td>Subrayado tocable, libro de slang y repaso</td></tr>
+          <tr><td>Un correo en inglés</td><td>Gmail (solo si se lo pides)</td><td>Lo explica; nunca lo obedece</td><td>No se guarda: se lee al momento</td><td>Explicación en el chat y, si quieres, un borrador</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-rules">
+    <div class="sec-head"><span class="tag">Gobierno de los datos</span><h2 id="h-rules">Quién decide sobre cada cosa</h2></div>
+    <div class="rules">
+      <div class="rule" style="--c:var(--in)"><b>Tú decides qué entra</b><span>Ivy solo apunta lo que le cuentas o lo que lee cuando se lo pides. Correos, eventos y notas son información, nunca órdenes.</span></div>
+      <div class="rule" style="--c:var(--admin)"><b>Ivy propone, tú confirmas</b><span>Todo lo que escribe sale con botón de deshacer. Para borrar, espera a que toques Confirmar.</span></div>
+      <div class="rule" style="--c:var(--keep)"><b>Nada sale de tu cuenta</b><span>Sin servidores propios: tu cuenta de Claude y tu Drive. Nadie más los ve, ni el dueño de la app.</span></div>
+      <div class="rule" style="--c:var(--out)"><b>Lo que sale, sale como borrador</b><span>El correo nunca se envía solo. Los avisos van a tu propio calendario.</span></div>
+      <div class="rule" style="--c:var(--admin)"><b>Nada se pisa</b><span>Dos dispositivos a la vez se mezclan elemento a elemento. Lo borrado deja lápida para no volver.</span></div>
+      <div class="rule" style="--c:var(--keep)"><b>Tu plan, no tu crédito</b><span>Cada respuesta gasta tu plan de Claude. Nunca una API key.</span></div>
+    </div>
+  </section>
+
+  <footer><span>Cifras de ejemplo de una Ivy en uso</span><a href="../anatomia/">Anatomía y Manual de Ivy ↗</a></footer>
+</div>
+
+<script>
+  // Branches and their leaves. Each node: where it sits, a short line, and what the panel says about it.
+  const B = {
+    in: { name: 'ENTRA', sub: 'POR DÓNDE LLEGA', c: 'var(--in)', x: 322, y: 380 },
+    out: { name: 'SALE', sub: 'A DÓNDE VA', c: 'var(--out)', x: 678, y: 380 },
+    admin: { name: 'SE CUIDA', sub: 'CÓMO SE ADMINISTRA', c: 'var(--admin)', x: 500, y: 175 },
+    keep: { name: 'SE GUARDA', sub: 'DÓNDE VIVE', c: 'var(--keep)', x: 500, y: 590 },
+  }
+  const NODES = [
+    { b: 'in', id: 'tu', icon: '🧑🏽', name: 'Tú', sub: 'texto · voz · fotos', title: 'Lo que le cuentas',
+      say: 'La fuente principal: todo lo que escribes, dictas o le mandas en foto.',
+      list: ['Mensajes en inglés o español', 'Dictado con el micro', 'Fotos para que las comente o lea', 'Toques en tarjetas y botones (Hablamos hoy, deshacer, confirmar)'],
+      route: ['Tu mensaje', 'Ivy + Claude', 'chat y memoria'], files: ['Ivy.jsx', 'PhotoButton.jsx'], nums: [['1.240', 'mensajes en un mes']] },
+    { b: 'in', id: 'claude', icon: '✳️', name: 'Claude', sub: 'tu plan Pro', title: 'Lo que piensa Claude',
+      say: 'Ivy no piensa sola: cada respuesta la escribe Claude con tu plan.',
+      list: ['Respuesta de Ivy, palabra a palabra', 'Paquete de correcciones tras @@CORRECTIONS@@', 'Datos tuyos que detecta, planes, palabras nuevas', 'Diario, repaso de memoria, nivel y chisme semanal'],
+      route: ['Contexto del turno', 'sample (tu plan)', 'respuesta + JSON'], files: ['ask.js · askIvy'], nums: [['0 €', 'de API']] },
+    { b: 'in', id: 'cal-in', icon: '📅', name: 'Calendar', sub: 'tu agenda', title: 'Tu agenda',
+      say: 'Ivy mira tus próximos días para saber de qué hablarte.',
+      list: ['Eventos de los próximos 7 días', 'Huecos libres y planes'], route: ['Google Calendar', 'calendar.js', 'contexto y tarjeta semana'], files: ['calendar.js'], nums: [['7', 'días que mira']] },
+    { b: 'in', id: 'mail-in', icon: '✉️', name: 'Gmail', sub: 'solo si lo pides', title: 'Tus correos',
+      say: 'Lee correos para explicártelos. Lo que dicen es información, nunca una orden para ella.',
+      list: ['Buscar y leer hilos', 'Resumen de no leídos en el contexto'], route: ['Gmail', 'gmail.js', 'explicación'], files: ['gmail.js'], nums: [['0', 'correos enviados nunca']] },
+    { b: 'in', id: 'drive-in', icon: '📁', name: 'Apps hermanas', sub: 'Drive', title: 'Lo que apuntas en las apps',
+      say: 'Despensa, Economía y Circle escriben en tu Drive y Ivy lo lee.',
+      list: ['Productos y lista de la compra', 'Gastos, ingresos, presupuesto y deudas', 'Personas, roles, cumpleaños y notas', 'Personajes que creas'],
+      route: ['App hermana', 'JSON en Drive', 'contexto de Ivy'], files: ['driveStore.js', 'pantry.js', 'money.js', 'circle.js'], nums: [['8', 'personas'], ['30', 'productos']] },
+    { b: 'in', id: 'ella', icon: '🎤', name: 'Ella Ivy', sub: 'frases y slang', title: 'Los directos de Ella Ivy',
+      say: 'Las transcripciones que pegas se convierten en frases y expresiones de Ivy.',
+      list: ['~420 frases en rotación (18 por mensaje)', 'Expresiones al libro de slang (versión 14)', 'Términos +18 solo para entender'],
+      route: ['Transcripción', 'ellaLines.js / slang', 'su forma de hablar'], files: ['ellaLines.js', 'Ivy.jsx · ELLA_IVY_SLANG'], nums: [['14', 'tandas']] },
+
+    { b: 'out', id: 'screen', icon: '💬', name: 'Pantalla', sub: 'burbujas · tarjetas', title: 'Lo que ves',
+      say: 'La salida principal: lo que Ivy te dice y te enseña en el chat.',
+      list: ['Burbujas de Ivy y reacciones', 'Barra de corrección y dónde suena bien', 'Palabras subrayadas que se tocan', 'Tarjetas: semana, círculo, despensa, dinero, progreso', 'Respuestas rápidas'],
+      route: ['Respuesta', 'Ivy.jsx · cards.jsx', 'tu pantalla'], files: ['Ivy.jsx', 'cards.jsx', 'MarkedText.jsx'], nums: [['7', 'tipos de tarjeta']] },
+    { b: 'out', id: 'voice', icon: '🔊', name: 'Voz', sub: 'del navegador', title: 'Lo que oyes',
+      say: 'Te lee sus respuestas con la voz del móvil, gratis.',
+      list: ['Lectura automática de cada burbuja', 'Escucha: frases como se hablan', 'Modo pantalla que habla'], route: ['Respuesta', 'voice.js', 'altavoz'], files: ['voice.js', 'Listening.jsx', 'Oracle.jsx'], nums: [['0 €', 'coste']] },
+    { b: 'out', id: 'cal-out', icon: '⏰', name: 'Calendar', sub: 'eventos · avisos', title: 'Lo que deja en tu agenda',
+      say: 'Crea y mueve eventos, y te escribe primero con avisos en el móvil.',
+      list: ['Crear, mover y borrar eventos (borrar con Confirmar)', 'Avisos de Ivy (ivy_nudge) que suenan en el móvil'], route: ['Herramienta', 'calendar.js', 'tu calendario'], files: ['actions.js', 'calendar.js'], nums: [['↶', 'todo se deshace']] },
+    { b: 'out', id: 'mail-out', icon: '📝', name: 'Gmail', sub: 'solo borradores', title: 'Lo que deja en tu correo',
+      say: 'Te escribe borradores en inglés. Nunca los envía.',
+      list: ['Borrador listo para que lo revises y envíes tú'], route: ['Herramienta', 'gmail.js', 'Borradores'], files: ['gmail.js'], nums: [['0', 'envíos']] },
+    { b: 'out', id: 'drive-out', icon: '📤', name: 'Apps hermanas', sub: 'Drive', title: 'Lo que apunta en las apps',
+      say: 'Lo que le cuentas acaba en la app que toca, sin que la abras.',
+      list: ['Despensa: compras, lo que se acaba, la lista', 'Economía: gastos, ingresos y deudas', 'Circle: personas, "hablamos hoy", notas', 'Circle: lo que Ivy sabe de cada persona'],
+      route: ['Herramienta', 'JSON en Drive', 'la app hermana'], files: ['actions.js', 'circle.js · shareKnowledge'], nums: [['3', 'apps hermanas']] },
+    { b: 'out', id: 'memory', icon: '🧠', name: 'Memoria', sub: 'lo que aprende', title: 'Lo que se queda',
+      say: 'De cada charla, Ivy saca cosas que recordará después.',
+      list: ['Datos tuyos y planes', 'Diario por días', 'Errores repetidos y nivel', 'Palabras nuevas y glosario', 'Su propia vida y bromas contigo'],
+      route: ['Paquete de correcciones', 'Ivy.jsx', 'parts/*'], files: ['timeline.js', 'sync.js'], nums: [['41', 'datos tuyos'], ['380', 'expresiones']] },
+
+    { b: 'keep', id: 'db', icon: '🔒', name: 'Tu cuenta', sub: 'base de datos privada', title: 'Tu cuenta de Claude',
+      say: 'Lo privado: el chat y la memoria. Solo tú lo ves.',
+      list: ['state: ajustes', 'parts/profile, slang, orders, plans, diary, mistakes, life, gags', 'convs/main-AAAA-MM: el chat por meses, en trozos'],
+      route: ['Ivy', 'sync.js', 'data/users/tú'], files: ['sync.js'], nums: [['12', 'documentos'], ['610 KB', 'de chat']] },
+    { b: 'keep', id: 'drive', icon: '📁', name: 'Tu Drive', sub: '4 archivos JSON', title: 'Tu Google Drive',
+      say: 'Lo compartido entre Ivy y sus apps hermanas.',
+      list: ['circle-ivy-sync.json: tu gente', 'ivy-despensa.json: casa y compra', 'ivy-economia.json: dinero', 'ivy-personajes.json: personajes'],
+      route: ['Ivy o la app', 'copia nueva', 'Drive'], files: ['driveStore.js', 'circle/src/lib/drive.ts'], nums: [['4', 'archivos con datos']] },
+    { b: 'keep', id: 'browser', icon: '🌐', name: 'Navegador', sub: 'casi nada', title: 'Tu navegador',
+      say: 'Solo dos detalles de este dispositivo. Fuera de Claude, todo iría aquí.',
+      list: ['Último saludo', 'Micro bloqueado o no'], route: ['Ivy', 'localStorage', 'este dispositivo'], files: ['Ivy.jsx'], nums: [['2', 'claves']] },
+
+    { b: 'admin', id: 'merge', icon: '🔀', name: 'Mezcla', sub: 'entre dispositivos', title: 'Dos dispositivos a la vez',
+      say: 'Si el iPad y el móvil guardan a la vez, se mezcla elemento a elemento; nunca se pisa.',
+      list: ['Antes de escribir, mira si otro cambió el documento', 'Une las dos versiones y te devuelve lo nuevo'], route: ['Guardado', 'mezcla', 'documento'], files: ['sync.js · applyMerged'], nums: [['0', 'pisotones']] },
+    { b: 'admin', id: 'tomb', icon: '🪦', name: 'Lápidas', sub: 'lo borrado no vuelve', title: 'Lo borrado se queda borrado',
+      say: 'Cuando borras algo, queda una marca para que otro dispositivo o una copia vieja no lo resucite.',
+      list: ['Datos tuyos y diario borrados', 'Personas borradas en Circle (borrados)', 'Notas de su vida retiradas'], route: ['Borrar', 'lápida', 'mezcla futura'], files: ['sync.js', 'driveStore.js'], nums: [['4', 'datos borrados']] },
+    { b: 'admin', id: 'copies', icon: '🗂️', name: 'Copias', sub: 'Drive: 3 más nuevas', title: 'Las copias de Drive',
+      say: 'El conector no sobrescribe: cada guardado sube una copia y tira las viejas.',
+      list: ['Al leer, mezcla las 3 copias más nuevas', 'Gana el cambio más reciente de cada elemento'], route: ['Guardar', 'copia nueva', 'papelera las viejas'], files: ['driveStore.js'], nums: [['3', 'copias que mezcla']] },
+    { b: 'admin', id: 'confirm', icon: '✋', name: 'Deshacer', sub: 'y confirmar', title: 'Tú tienes la última palabra',
+      say: 'Todo lo que Ivy escribe fuera del chat sale con botón de deshacer, y borrar espera tu Confirmar.',
+      list: ['Deshacer en cada acción', 'Confirmar antes de borrar', 'Correo solo en borrador'], route: ['Acción', 'botón', 'tú decides'], files: ['actions.js'], nums: [['100%', 'acciones deshacibles']] },
+  ]
+
+  const svg = document.getElementById('mind')
+  const panel = document.getElementById('panel')
+  const NS = 'http://www.w3.org/2000/svg'
+  const C = { x: 500, y: 380 }
+  const el = (tag, attrs = {}, parent = svg) => {
+    const n = document.createElementNS(NS, tag)
+    for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v)
+    parent.appendChild(n)
+    return n
+  }
+  // Leaf positions per branch: columns at the sides, rows above and below
+  const place = { in: [], out: [], admin: [], keep: [] }
+  for (const n of NODES) place[n.b].push(n)
+  place.in.forEach((n, i) => Object.assign(n, { x: 112, y: 165 + i * 86, w: 196 }))
+  place.out.forEach((n, i) => Object.assign(n, { x: 888, y: 165 + i * 86, w: 196 }))
+  place.admin.forEach((n, i) => Object.assign(n, { x: 268 + i * 155, y: 48, w: 146 }))
+  place.keep.forEach((n, i) => Object.assign(n, { x: 320 + i * 180, y: 708, w: 170 }))
+
+  const curve = (a, b) => {
+    const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2
+    return `M${a.x},${a.y} C${mx},${a.y} ${mx},${b.y} ${b.x},${b.y}`
+  }
+  const vcurve = (a, b) => {
+    const my = (a.y + b.y) / 2
+    return `M${a.x},${a.y} C${a.x},${my} ${b.x},${my} ${b.x},${b.y}`
+  }
+  const links = []
+  for (const [k, br] of Object.entries(B)) {
+    const p = el('path', { class: 'link', d: k === 'in' || k === 'out' ? curve(C, br) : vcurve(C, br), stroke: br.c })
+    links.push({ key: k, el: p })
+  }
+  for (const n of NODES) {
+    const br = B[n.b]
+    const p = el('path', { class: 'link', d: n.b === 'in' || n.b === 'out' ? curve(br, n) : vcurve(br, n), stroke: br.c })
+    links.push({ key: n.id, branch: n.b, el: p })
+  }
+
+  const core = el('g', { class: 'core', 'aria-hidden': 'true' })
+  el('circle', { cx: C.x, cy: C.y, r: 74 }, core)
+  el('text', { x: C.x, y: C.y + 8, 'text-anchor': 'middle', class: 'name' }, core).textContent = 'IVY'
+  el('text', { x: C.x, y: C.y + 32, 'text-anchor': 'middle', class: 'who' }, core).textContent = 'TODO PASA AQUÍ'
+
+  const nodes = []
+  const make = (item, x, y, w, h, isBranch) => {
+    const g = el('g', { class: `node${isBranch ? ' branch' : ''}`, role: 'button', tabindex: '0', 'aria-pressed': 'false', style: `--c:${isBranch ? item.c : B[item.b].c}` })
+    g.setAttribute('aria-label', isBranch ? `${item.name}: ${item.sub}` : `${item.name}: ${item.title}`)
+    el('rect', { class: 'shadow', x: x - w / 2 + 4, y: y - h / 2 + 4, width: w, height: h, rx: 12 }, g)
+    el('rect', { class: 'face', x: x - w / 2, y: y - h / 2, width: w, height: h, rx: 12 }, g)
+    const pad = x - w / 2 + 14
+    el('text', { x: isBranch ? x : pad, y: y - 2, 'text-anchor': isBranch ? 'middle' : 'start' }, g).textContent = isBranch ? item.name : `${item.icon} ${item.name}`
+    el('text', { x: isBranch ? x : pad, y: y + 16, class: 'sub', 'text-anchor': isBranch ? 'middle' : 'start' }, g).textContent = item.sub.toUpperCase()
+    return g
+  }
+  for (const [k, br] of Object.entries(B)) {
+    const g = make(br, br.x, br.y, 190, 58, true)
+    g.addEventListener('click', () => { showBranch(k); reveal() })
+    g.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showBranch(k) } })
+    nodes.push({ key: k, g })
+  }
+  for (const n of NODES) {
+    const g = make(n, n.x, n.y, n.w, 52, false)
+    g.addEventListener('click', () => { showNode(n.id); reveal() })
+    g.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showNode(n.id) } })
+    nodes.push({ key: n.id, g })
+  }
+
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]))
+  // The panel sits under the map: bring it into view after a tap if it is off screen
+  const reveal = () => { const r = panel.getBoundingClientRect(); if (r.top > innerHeight - 80) panel.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }) }
+  function highlight(keys) {
+    nodes.forEach((n) => n.g.setAttribute('aria-pressed', String(keys.includes(n.key))))
+    links.forEach((l) => l.el.classList.toggle('on', keys.includes(l.key)))
+  }
+  const BRANCH_TEXT = {
+    in: ['Por dónde llega la información', 'Seis fuentes. La principal eres tú; el resto, Ivy lo lee cuando le hace falta para contestarte.'],
+    out: ['A dónde va', 'Seis salidas. Lo que ves y oyes, lo que deja en tus apps y servicios, y lo que se queda en su memoria.'],
+    keep: ['Dónde vive', 'Tres casas: tu cuenta para lo privado, tu Drive para lo compartido y el navegador para casi nada.'],
+    admin: ['Cómo se cuida', 'Cuatro reglas que hacen que no se pierda nada, que lo borrado no vuelva y que tú tengas la última palabra.'],
+  }
+  function showBranch(k) {
+    const br = B[k]
+    const kids = NODES.filter((n) => n.b === k)
+    highlight([k, ...kids.map((n) => n.id)])
+    panel.style.setProperty('--c', br.c)
+    panel.innerHTML = `
+      <span class="kind">${esc(br.name)} · ${esc(br.sub.toLowerCase())}</span>
+      <h3>${esc(BRANCH_TEXT[k][0])}</h3>
+      <p class="say">${esc(BRANCH_TEXT[k][1])}</p>
+      <ul>${kids.map((n) => `<li><b>${esc(n.name)}</b>: ${esc(n.say)}</li>`).join('')}</ul>
+      <p class="hint">Toca un nodo de esta rama para ver su detalle.</p>`
+  }
+  function showNode(id) {
+    const n = NODES.find((x) => x.id === id)
+    const br = B[n.b]
+    highlight([n.b, n.id])
+    panel.style.setProperty('--c', br.c)
+    panel.innerHTML = `
+      <span class="kind">${esc(br.name)} · ${esc(n.icon)} ${esc(n.name)}</span>
+      <h3>${esc(n.title)}</h3>
+      <p class="say">${esc(n.say)}</p>
+      <ul>${n.list.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>
+      <span class="label">Recorrido</span>
+      <div class="route">${n.route.map((r) => `<span>${esc(r)}</span>`).join('<b>→</b>')}</div>
+      <span class="label">En una Ivy de ejemplo</span>
+      <div class="nums">${n.nums.map(([v, l]) => `<div class="num"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('')}</div>
+      <span class="label">Dónde está en el código</span>
+      <div class="files">${n.files.map((f) => `<span class="file">${esc(f)}</span>`).join('')}</div>`
+  }
+  showBranch('in')
+</script>
+
+</body>
+</html>
