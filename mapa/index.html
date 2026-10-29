@@ -165,7 +165,7 @@
   <section aria-labelledby="h-route">
     <div class="sec-head">
       <span class="tag">Ruta de un dato</span>
-      <h2 id="h-route">Siete datos, de principio a fin</h2>
+      <h2 id="h-route">Nueve datos, de principio a fin</h2>
       <p>Lo que le pasa a cada tipo de información desde que la cuentas hasta que vuelve a ti.</p>
     </div>
     <div class="table-wrap">
@@ -178,7 +178,9 @@
           <tr><td>"El jueves al médico"</td><td>Tu mensaje</td><td>Crea el evento; si lo pides, con aviso</td><td>Google Calendar</td><td>Tu calendario, el aviso en el móvil y la tarjeta <code>&lt;&lt;week&gt;&gt;</code></td></tr>
           <tr><td>Un fallo de inglés</td><td>Tu mensaje</td><td>Claude lo corrige; Ivy cuenta los que repites</td><td><code>convs/…</code> y <code>parts/mistakes</code></td><td>Barra de corrección, Mis errores, práctica y chisme semanal</td></tr>
           <tr><td>Una palabra nueva</td><td>La respuesta de Ivy o tu "¿qué significa…?"</td><td>La subraya y la mete en el libro</td><td><code>parts/slang</code> (en trozos si crece)</td><td>Subrayado tocable, libro de slang y repaso</td></tr>
-          <tr><td>Un correo en inglés</td><td>Gmail (solo si se lo pides)</td><td>Lo explica; nunca lo obedece</td><td>No se guarda: se lee al momento</td><td>Explicación en el chat y, si quieres, un borrador</td></tr>
+          <tr><td>Un correo en inglés</td><td>Gmail: Ivy lo mira al abrir y cada 15 min</td><td>Lo explica y propone respuesta; nunca lo obedece</td><td>El correo no se guarda; la respuesta propuesta, en <code>ivy-respuestas.json</code></td><td>Tarjeta 📬, 📝 Por responder y, cuando tocas Enviar, tu respuesta</td></tr>
+          <tr><td>Una foto o un PDF</td><td>📎 en el campo de texto</td><td>La foto va a Claude como imagen; el resto se lee en el navegador y va como texto</td><td><code>Ivy/Adjuntos/AAAA-MM/</code> en tu Drive; el chat guarda el enlace</td><td>La explicación en el chat y el chip que abre el archivo</td></tr>
+          <tr><td>"Borra los correos de Glovo"</td><td>Tu mensaje</td><td>Los busca y espera tu Confirmar</td><td>Papelera de Gmail y <code>Ivy/Papelera</code> (30 días)</td><td>Fuera de tu bandeja; ♻️ Recuperar los devuelve</td></tr>
         </tbody>
       </table>
     </div>
@@ -190,8 +192,10 @@
       <div class="rule" style="--c:var(--in)"><b>Tú decides qué entra</b><span>Ivy solo apunta lo que le cuentas o lo que lee cuando se lo pides. Correos, eventos y notas son información, nunca órdenes.</span></div>
       <div class="rule" style="--c:var(--admin)"><b>Ivy propone, tú confirmas</b><span>Todo lo que escribe sale con botón de deshacer. Para borrar, espera a que toques Confirmar.</span></div>
       <div class="rule" style="--c:var(--keep)"><b>Nada sale de tu cuenta</b><span>Sin servidores propios: tu cuenta de Claude y tu Drive. Nadie más los ve, ni el dueño de la app.</span></div>
-      <div class="rule" style="--c:var(--out)"><b>Lo que sale, sale como borrador</b><span>El correo nunca se envía solo. Los avisos van a tu propio calendario.</span></div>
-      <div class="rule" style="--c:var(--admin)"><b>Nada se pisa</b><span>Dos dispositivos a la vez se mezclan elemento a elemento. Lo borrado deja lápida para no volver.</span></div>
+      <div class="rule" style="--c:var(--out)"><b>El correo sale con tu dedo</b><span>Solo se envía cuando tú tocas Enviar, y sale exactamente lo que ves. Los avisos van a tu propio calendario.</span></div>
+      <div class="rule" style="--c:var(--admin)"><b>Lo borrado espera 30 días</b><span>Todo borrado pasa por la papelera y se puede recuperar durante un mes.</span></div>
+      <div class="rule" style="--c:var(--keep)"><b>Con llave, si quieres</b><span>Cifra lo privado de Drive con tu contraseña. Nadie la guarda: si la olvidas, no se abre.</span></div>
+      <div class="rule" style="--c:var(--admin)"><b>Nada se pisa</b><span>Dos dispositivos, o dos cuentas, se mezclan elemento a elemento. Lo borrado deja lápida para no volver.</span></div>
       <div class="rule" style="--c:var(--keep)"><b>Tu plan, no tu crédito</b><span>Cada respuesta gasta tu plan de Claude. Nunca una API key.</span></div>
     </div>
   </section>
@@ -208,10 +212,10 @@
     keep: { name: 'SE GUARDA', sub: 'DÓNDE VIVE', c: 'var(--keep)', x: 500, y: 590 },
   }
   const NODES = [
-    { b: 'in', id: 'tu', icon: '🧑🏽', name: 'Tú', sub: 'texto · voz · fotos', title: 'Lo que le cuentas',
-      say: 'La fuente principal: todo lo que escribes, dictas o le mandas en foto.',
-      list: ['Mensajes en inglés o español', 'Dictado con el micro', 'Fotos para que las comente o lea', 'Toques en tarjetas y botones (Hablamos hoy, deshacer, confirmar)'],
-      route: ['Tu mensaje', 'Ivy + Claude', 'chat y memoria'], files: ['Ivy.jsx', 'PhotoButton.jsx'], nums: [['1.240', 'mensajes en un mes']] },
+    { b: 'in', id: 'tu', icon: '🧑🏽', name: 'Tú', sub: 'texto · fotos · archivos', title: 'Lo que le cuentas',
+      say: 'La fuente principal: todo lo que escribes o le adjuntas.',
+      list: ['Mensajes en inglés o español (también dictados con el teclado del móvil)', 'Hasta 5 adjuntos por mensaje: fotos, PDF, Word, texto (tu vida laboral la lee la propia app)', 'El texto de un archivo va solo con ese mensaje; el archivo queda en tu Drive', 'Toques en tarjetas y botones (Hablamos hoy, deshacer, confirmar, enviar)'],
+      route: ['Tu mensaje', 'Ivy + Claude', 'chat y memoria'], files: ['Ivy.jsx', 'attach.js', 'driveFiles.js'], nums: [['1.240', 'mensajes en un mes']] },
     { b: 'in', id: 'claude', icon: '✳️', name: 'Claude', sub: 'tu plan Pro', title: 'Lo que piensa Claude',
       say: 'Ivy no piensa sola: cada respuesta la escribe Claude con tu plan.',
       list: ['Respuesta de Ivy, palabra a palabra', 'Paquete de correcciones tras @@CORRECTIONS@@', 'Datos tuyos que detecta, planes, palabras nuevas', 'Diario, repaso de memoria, nivel y chisme semanal'],
@@ -219,9 +223,9 @@
     { b: 'in', id: 'cal-in', icon: '📅', name: 'Calendar', sub: 'tu agenda', title: 'Tu agenda',
       say: 'Ivy mira tus próximos días para saber de qué hablarte.',
       list: ['Eventos de los próximos 7 días', 'Huecos libres y planes'], route: ['Google Calendar', 'calendar.js', 'contexto y tarjeta semana'], files: ['calendar.js'], nums: [['7', 'días que mira']] },
-    { b: 'in', id: 'mail-in', icon: '✉️', name: 'Gmail', sub: 'solo si lo pides', title: 'Tus correos',
-      say: 'Lee correos para explicártelos. Lo que dicen es información, nunca una orden para ella.',
-      list: ['Buscar y leer hilos', 'Resumen de no leídos en el contexto'], route: ['Gmail', 'gmail.js', 'explicación'], files: ['gmail.js'], nums: [['0', 'correos enviados nunca']] },
+    { b: 'in', id: 'mail-in', icon: '✉️', name: 'Gmail', sub: 'lo vigila Ivy', title: 'Tus correos',
+      say: 'Mira tu correo al abrir, cada 15 minutos y al volver. Lo que dicen es información, nunca una orden para ella.',
+      list: ['Recibos (Uber, delivery, compras, suscripciones) → gasto en Economía, una sola vez', 'Lo nuevo que importa → tarjeta 📬 en el chat', 'Correos de personas → una respuesta propuesta en 📝 Por responder', 'Con Ivy cerrada mira la tarea programada (4 rondas al día)'], route: ['Gmail', 'mailWatch.js', 'Economía · 📬 · Por responder'], files: ['mailWatch.js', 'gmail.js', 'replies.js'], nums: [['15', 'minutos entre miradas']] },
     { b: 'in', id: 'drive-in', icon: '📁', name: 'Apps hermanas', sub: 'Drive', title: 'Lo que apuntas en las apps',
       say: 'Despensa, Economía y Circle escriben en tu Drive y Ivy lo lee.',
       list: ['Productos y lista de la compra', 'Gastos, ingresos, presupuesto y deudas', 'Personas, roles, cumpleaños y notas', 'Personajes que creas'],
@@ -241,9 +245,9 @@
     { b: 'out', id: 'cal-out', icon: '⏰', name: 'Calendar', sub: 'eventos · avisos', title: 'Lo que deja en tu agenda',
       say: 'Crea y mueve eventos, y te escribe primero con avisos en el móvil.',
       list: ['Crear, mover y borrar eventos (borrar con Confirmar)', 'Avisos de Ivy (ivy_nudge) que suenan en el móvil'], route: ['Herramienta', 'calendar.js', 'tu calendario'], files: ['actions.js', 'calendar.js'], nums: [['↶', 'todo se deshace']] },
-    { b: 'out', id: 'mail-out', icon: '📝', name: 'Gmail', sub: 'solo borradores', title: 'Lo que deja en tu correo',
-      say: 'Te escribe borradores en inglés. Nunca los envía.',
-      list: ['Borrador listo para que lo revises y envíes tú'], route: ['Herramienta', 'gmail.js', 'Borradores'], files: ['gmail.js'], nums: [['0', 'envíos']] },
+    { b: 'out', id: 'mail-out', icon: '📝', name: 'Gmail', sub: 'solo con tu Enviar', title: 'Lo que deja en tu correo',
+      say: 'Te escribe respuestas y correos nuevos, pero solo salen cuando tú tocas Enviar. Claude nunca envía.',
+      list: ['📝 Por responder: lo revisas, editas, revisas el inglés y tocas Enviar (dos toques)', 'Borradores en Gmail si los prefieres', 'Correos a la papelera de Gmail cuando se lo pides, tras tu Confirmar (se pueden recuperar)'], route: ['Herramienta', 'Por responder', 'tu botón Enviar'], files: ['replies.js', 'RepliesDialog.jsx', 'gmail.js'], nums: [['0', 'envíos sin ti']] },
     { b: 'out', id: 'drive-out', icon: '📤', name: 'Apps hermanas', sub: 'Drive', title: 'Lo que apunta en las apps',
       say: 'Lo que le cuentas acaba en la app que toca, sin que la abras.',
       list: ['Despensa: compras, lo que se acaba, la lista', 'Economía: gastos, ingresos y deudas', 'Circle: personas, "hablamos hoy", notas', 'Circle: lo que Ivy sabe de cada persona'],
@@ -257,26 +261,32 @@
       say: 'Lo privado: el chat y la memoria. Solo tú lo ves.',
       list: ['state: ajustes', 'parts/profile, slang, orders, plans, diary, mistakes, life, gags', 'convs/main-AAAA-MM: el chat por meses, en trozos'],
       route: ['Ivy', 'sync.js', 'data/users/tú'], files: ['sync.js'], nums: [['12', 'documentos'], ['610 KB', 'de chat']] },
-    { b: 'keep', id: 'drive', icon: '📁', name: 'Tu Drive', sub: '4 archivos JSON', title: 'Tu Google Drive',
-      say: 'Lo compartido entre Ivy y sus apps hermanas.',
-      list: ['circle-ivy-sync.json: tu gente', 'ivy-despensa.json: casa y compra', 'ivy-economia.json: dinero', 'ivy-personajes.json: personajes'],
-      route: ['Ivy o la app', 'copia nueva', 'Drive'], files: ['driveStore.js', 'circle/src/lib/drive.ts'], nums: [['4', 'archivos con datos']] },
-    { b: 'keep', id: 'browser', icon: '🌐', name: 'Navegador', sub: 'casi nada', title: 'Tu navegador',
-      say: 'Solo dos detalles de este dispositivo. Fuera de Claude, todo iría aquí.',
-      list: ['Último saludo', 'Micro bloqueado o no'], route: ['Ivy', 'localStorage', 'este dispositivo'], files: ['Ivy.jsx'], nums: [['2', 'claves']] },
+    { b: 'keep', id: 'drive', icon: '📁', name: 'Tu Drive', sub: 'la carpeta Ivy', title: 'Tu Google Drive',
+      say: 'Todo en una carpeta "Ivy": lo que comparte con sus apps hermanas y una copia de lo privado para tu otra cuenta.',
+      list: ['Memoria/ivy-estado.json: memoria, slang, perfil y ajustes', 'Chat/chat-AAAA-MM.json: el chat, un archivo por mes', 'Copias/: una copia completa por semana (las 8 últimas)', 'Papelera/ y Adjuntos/AAAA-MM/: lo borrado y tus archivos', 'Despensa, Economía, Circle, personajes y Por responder'],
+      route: ['Ivy o la app', 'copia nueva', 'carpeta Ivy'], files: ['driveSync.js', 'driveStore.js', 'driveFolder.js'], nums: [['6', 'subcarpetas']] },
+    { b: 'keep', id: 'browser', icon: '🌐', name: 'Navegador', sub: 'solo detalles', title: 'Tu navegador',
+      say: 'Solo detalles de este dispositivo. Nada que no esté también en tu cuenta o tu Drive.',
+      list: ['Qué meses del chat ya bajó de Drive', 'Cuándo cambiaste los ajustes aquí', 'La llave del cifrado, si lo activas (nunca la contraseña)', 'Último saludo'], route: ['Ivy', 'localStorage', 'este dispositivo'], files: ['driveSync.js', 'vault.js'], nums: [['0', 'datos que solo estén aquí']] },
 
-    { b: 'admin', id: 'merge', icon: '🔀', name: 'Mezcla', sub: 'entre dispositivos', title: 'Dos dispositivos a la vez',
-      say: 'Si el iPad y el móvil guardan a la vez, se mezcla elemento a elemento; nunca se pisa.',
-      list: ['Antes de escribir, mira si otro cambió el documento', 'Une las dos versiones y te devuelve lo nuevo'], route: ['Guardado', 'mezcla', 'documento'], files: ['sync.js · applyMerged'], nums: [['0', 'pisotones']] },
+    { b: 'admin', id: 'merge', icon: '🔀', name: 'Mezcla', sub: 'entre dispositivos', title: 'Dos dispositivos, o dos cuentas',
+      say: 'Si el móvil y el ordenador guardan a la vez, o tu otra cuenta de Claude, se mezcla elemento a elemento; nunca se pisa.',
+      list: ['Antes de escribir, mira si otro cambió el documento', 'Une las dos versiones y te devuelve lo nuevo', 'Entre cuentas viaja por la carpeta Ivy de Drive: al abrir, cada 90 s y al salir'], route: ['Guardado', 'mezcla', 'documento'], files: ['sync.js · applyMerged', 'driveSync.js'], nums: [['0', 'pisotones']] },
     { b: 'admin', id: 'tomb', icon: '🪦', name: 'Lápidas', sub: 'lo borrado no vuelve', title: 'Lo borrado se queda borrado',
       say: 'Cuando borras algo, queda una marca para que otro dispositivo o una copia vieja no lo resucite.',
       list: ['Datos tuyos y diario borrados', 'Personas borradas en Circle (borrados)', 'Notas de su vida retiradas'], route: ['Borrar', 'lápida', 'mezcla futura'], files: ['sync.js', 'driveStore.js'], nums: [['4', 'datos borrados']] },
-    { b: 'admin', id: 'copies', icon: '🗂️', name: 'Copias', sub: 'Drive: 3 más nuevas', title: 'Las copias de Drive',
-      say: 'El conector no sobrescribe: cada guardado sube una copia y tira las viejas.',
-      list: ['Al leer, mezcla las 3 copias más nuevas', 'Gana el cambio más reciente de cada elemento'], route: ['Guardar', 'copia nueva', 'papelera las viejas'], files: ['driveStore.js'], nums: [['3', 'copias que mezcla']] },
+    { b: 'admin', id: 'copies', icon: '🗂️', name: 'Copias', sub: 'y copias de seguridad', title: 'Las copias de Drive',
+      say: 'El conector no sobrescribe: cada guardado sube una copia y tira las viejas. Y cada semana, una copia completa aparte.',
+      list: ['Al leer, mezcla las 3 copias más nuevas', 'Gana el cambio más reciente de cada elemento', 'Copias/copia-AAAA-MM-DD.json: una por semana, las 8 últimas', '💾 Descargar copia y 📥 Restaurar desde el menú'], route: ['Guardar', 'copia nueva', 'papelera las viejas'], files: ['driveStore.js', 'driveSync.js'], nums: [['8', 'semanas de copias']] },
     { b: 'admin', id: 'confirm', icon: '✋', name: 'Deshacer', sub: 'y confirmar', title: 'Tú tienes la última palabra',
       say: 'Todo lo que Ivy escribe fuera del chat sale con botón de deshacer, y borrar espera tu Confirmar.',
-      list: ['Deshacer en cada acción', 'Confirmar antes de borrar', 'Correo solo en borrador'], route: ['Acción', 'botón', 'tú decides'], files: ['actions.js'], nums: [['100%', 'acciones deshacibles']] },
+      list: ['Deshacer en cada acción', 'Confirmar antes de borrar', 'Correo solo con tu Enviar'], route: ['Acción', 'botón', 'tú decides'], files: ['actions.js'], nums: [['100%', 'acciones deshacibles']] },
+    { b: 'admin', id: 'trash', icon: '♻️', name: 'Papelera', sub: '30 días', title: 'Lo borrado espera un mes',
+      say: 'Lo que borras con Confirmar (gente, eventos, gastos, memoria, slang, correos…) espera 30 días en Ivy/Papelera y vuelve con Recuperar.',
+      list: ['Se guarda lo borrado, no solo una marca', 'Recuperar desde cualquier cuenta o día', 'Pasados 30 días se va del todo, con lápida'], route: ['Confirmar', 'Ivy/Papelera', 'Recuperar'], files: ['trash.js', 'TrashDialog.jsx'], nums: [['30', 'días']] },
+    { b: 'admin', id: 'vault', icon: '🔐', name: 'Cifrado', sub: 'si tú quieres', title: 'Cifrado con tu contraseña',
+      say: 'Opcional: memoria, chat, copias y papelera van cifrados en Drive. Quien entre en tu Drive solo ve cajas cerradas.',
+      list: ['AES-256 con una llave que sale de tu contraseña', 'Tu otra cuenta la pide una vez', 'Lo que leen otras apps (Despensa, Economía, Circle, correo) sigue legible', 'Contraseña olvidada = lo cifrado no se abre (tu cuenta de Claude sí guarda todo)'], route: ['Guardar', 'vault.js', 'cajas cerradas'], files: ['vault.js', 'VaultDialog.jsx'], nums: [['256', 'bits']] },
   ]
 
   const svg = document.getElementById('mind')
@@ -294,7 +304,7 @@
   for (const n of NODES) place[n.b].push(n)
   place.in.forEach((n, i) => Object.assign(n, { x: 112, y: 165 + i * 86, w: 196 }))
   place.out.forEach((n, i) => Object.assign(n, { x: 888, y: 165 + i * 86, w: 196 }))
-  place.admin.forEach((n, i) => Object.assign(n, { x: 268 + i * 155, y: 48, w: 146 }))
+  place.admin.forEach((n, i) => Object.assign(n, { x: 92 + i * 163, y: 48, w: 150 }))
   place.keep.forEach((n, i) => Object.assign(n, { x: 320 + i * 180, y: 708, w: 170 }))
 
   const curve = (a, b) => {

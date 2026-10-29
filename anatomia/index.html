@@ -335,22 +335,29 @@
         <div class="bar" role="img" aria-label="92 de 180 kilobytes"><i style="width:51%"></i></div>
       </div>
       <div class="home">
-        <h3>Tu Google Drive <small>compartido</small></h3>
-        <p>Un archivo por app. Ivy y las apps hermanas leen y escriben el mismo.</p>
+        <h3>Tu Google Drive <small>la carpeta Ivy</small></h3>
+        <p>Todo en la carpeta Ivy: un archivo por app hermana, que Ivy y la app leen y escriben a la vez, y en subcarpetas lo privado para tu otra cuenta.</p>
         <div class="rows">
           <div class="row"><span class="k">circle-ivy-sync.json<em>tu gente</em></span><span class="v">8 personas</span></div>
           <div class="row"><span class="k">ivy-despensa.json<em>casa y lista de la compra</em></span><span class="v">30 productos</span></div>
           <div class="row none"><span class="k">ivy-economia.json<em>gastos, ingresos, deudas</em></span><span class="v">46 movimientos</span></div>
           <div class="row none"><span class="k">ivy-personajes.json<em>personajes creados</em></span><span class="v">1 personaje</span></div>
+          <div class="row"><span class="k">Memoria/ivy-estado.json<em>memoria, slang, perfil y ajustes, sin chat</em></span><span class="v">privado</span></div>
+          <div class="row"><span class="k">Chat/chat-AAAA-MM.json<em>el chat, un archivo por mes</em></span><span class="v">privado</span></div>
+          <div class="row"><span class="k">Copias/copia-AAAA-MM-DD.json<em>todo, una por semana</em></span><span class="v">las 8 últimas</span></div>
+          <div class="row"><span class="k">Papelera/ivy-papelera.json<em>lo que borras, 30 días</em></span><span class="v">♻️</span></div>
+          <div class="row"><span class="k">Adjuntos/AAAA-MM/<em>las fotos y archivos que le pasas</em></span><span class="v">📎</span></div>
         </div>
-        <p>El conector no puede sobrescribir: cada guardado sube una copia nueva y tira las viejas. Al leer se mezclan las 3 más nuevas y lo borrado queda marcado para que no vuelva.</p>
+        <p>El conector no puede sobrescribir: cada guardado sube una copia nueva y tira las viejas. Al leer se mezclan las 3 más nuevas y lo borrado queda marcado para que no vuelva. Si lo activas, Memoria, Chat, Copias y Papelera van cifrados con tu contraseña.</p>
       </div>
       <div class="home">
         <h3>Tu navegador <small>de paso</small></h3>
-        <p>Casi nada: cuándo te saludó por última vez y el esquema de tu conector de Indeed. Fuera de Claude, todo se guardaría aquí.</p>
+        <p>Solo detalles de este dispositivo; nada que no esté también en tu cuenta o tu Drive.</p>
         <div class="rows">
           <div class="row"><span class="k">ivy-intro-at<em>último saludo</em></span><span class="v">hora</span></div>
           <div class="row"><span class="k">ivy-indeed-schema<em>qué argumentos pide Indeed</em></span><span class="v">1 KB</span></div>
+          <div class="row"><span class="k">ivy-drive-chat-known<em>qué meses del chat ya bajó de Drive</em></span><span class="v">1 KB</span></div>
+          <div class="row"><span class="k">ivy-vault<em>la llave del cifrado, si lo activas (nunca la contraseña)</em></span><span class="v">opcional</span></div>
         </div>
       </div>
     </div>
@@ -378,7 +385,10 @@
       <div class="lock"><b>Una pieza rota no tumba el chat</b><span>Antes de cada mensaje mide sus herramientas y aparta la que no cumpla las reglas de Claude, y una prueba lo vigila.</span></div>
       <div class="lock"><b>No se inventa tu vida</b><span>CVs, respuestas de entrevista y correos salen solo de lo que sabe de ti; lo que no sabe va entre [corchetes] para que lo rellenes.</span></div>
       <div class="lock"><b>Tu plan, no tu crédito</b><span>Todo pasa por Claude con tu plan Pro. Nunca gasta API key.</span></div>
-      <div class="lock"><b>Nada se pisa</b><span>Dos dispositivos a la vez: se mezcla elemento a elemento. Lo borrado deja lápida para no resucitar.</span></div>
+      <div class="lock"><b>Nada se pisa</b><span>Dos dispositivos, o tus dos cuentas de Claude: se mezcla elemento a elemento. Lo borrado deja lápida para no resucitar.</span></div>
+      <div class="lock"><b>Lo borrado espera 30 días</b><span>Todo lo que borras con Confirmar pasa por la ♻️ Papelera y vuelve con Recuperar durante un mes, desde cualquier cuenta.</span></div>
+      <div class="lock"><b>Con llave, si quieres</b><span>Cifrado AES-256 de lo privado en Drive con tu contraseña. Nadie la guarda: si la olvidas, no se abre.</span></div>
+      <div class="lock"><b>Sabes dónde está todo</b><span>🧾 Tus datos dice dónde vive cada cosa, cuándo se guardó y si algo se atascó.</span></div>
     </div>
   </section>
 
@@ -386,7 +396,7 @@
   </div>
   <div class="view" id="v-manual" hidden>
   <header>
-    <span class="tag">Manual corporativo y de diseño · versión 1.1 · octubre 2026</span>
+    <span class="tag">Manual corporativo y de diseño · versión 1.2 · octubre 2026</span>
     <h1>Manual de <span>Ivy</span></h1>
     <p class="lede">Quién es Ivy como marca, cómo habla y cómo se ve. Sirve para la app, la web, el paquete descargable y cualquier pieza nueva: si algo no está aquí, se decide con el mismo criterio.</p>
     <nav class="toc" aria-label="Capítulos del manual">
@@ -540,10 +550,12 @@
     <div class="sec-head"><span class="tag">08 · Datos y privacidad</span><h2 id="h-m-datos">Lo tuyo es tuyo</h2>
       <p>Principios que no se negocian en ninguna versión, ni para empresas.</p></div>
     <div class="rules">
-      <div class="rule"><b>En tu cuenta y tu Drive</b><span>Ivy no tiene servidores. El chat vive en tu cuenta de Claude; casa, dinero y gente, en tu Google Drive.</span></div>
+      <div class="rule"><b>En tu cuenta y tu Drive</b><span>Ivy no tiene servidores. El chat vive en tu cuenta de Claude; casa, dinero, gente y una copia de lo privado, en la carpeta Ivy de tu Google Drive.</span></div>
       <div class="rule"><b>Tu plan, sin cobros aparte</b><span>Ivy habla con Claude con el plan de quien la usa. Nunca con una API key.</span></div>
       <div class="rule"><b>Borrar, solo si confirmas</b><span>Todo lo que apunta se puede deshacer, y para borrar espera tu Confirmar.</span></div>
-      <div class="rule"><b>El correo no se envía</b><span>Lee y deja borradores. Lo que dice un correo es información, nunca una orden para ella.</span></div>
+      <div class="rule"><b>El correo sale con tu dedo</b><span>Propone respuestas y borradores; solo se envía con tu Enviar, tal cual lo ves. Lo que dice un correo es información, nunca una orden para ella.</span></div>
+      <div class="rule"><b>Lo borrado se recupera</b><span>Papelera de 30 días para todo lo que se borra con Confirmar.</span></div>
+      <div class="rule"><b>Cifrado a elección</b><span>Lo privado en Drive se puede cifrar con una contraseña que solo sabe quien la usa.</span></div>
     </div>
     <a class="xref" href="#anatomia" data-go="h-homes">Dónde vive cada dato en la Anatomía →</a>
   </section>
@@ -551,7 +563,7 @@
   <section id="m-negocio" aria-labelledby="h-m-negocio">
     <div class="sec-head"><span class="tag">09 · Producto</span><h2 id="h-m-negocio">Cómo se entrega</h2></div>
     <div class="rules">
-      <div class="rule"><b>Personas</b><span>Descargan ivy-boy-bye.zip desde la web y su Claude la instala en su cuenta. Necesitan plan Pro.</span></div>
+      <div class="rule"><b>Personas</b><span>Descargan ivy-boy-bye.zip desde la web y su Claude la instala en su cuenta. Vale la cuenta gratuita; con un plan de pago aguanta más mensajes.</span></div>
       <div class="rule"><b>Empresas</b><span>Con plan Team o Enterprise de Claude, la instalan en su organización y la comparten con su gente.</span></div>
       <div class="rule"><b>Licencia</b><span>Software propietario. Se usa, no se revende ni se redistribuye.</span></div>
       <div class="rule"><b>Actualizaciones</b><span>Se descarga la versión nueva y se publica encima de los artifacts de siempre, sin perder datos.</span></div>
@@ -572,7 +584,7 @@
     </ul>
   </section>
 
-  <footer>Manual de Ivy · v1.1 · octubre 2026 · motkvil/Ivy</footer>
+  <footer>Manual de Ivy · v1.2 · octubre 2026 · motkvil/Ivy</footer>
   </div>
 </div>
 
@@ -593,16 +605,16 @@
       files: ['ask.js · askIvy', 'voice.js', 'Oracle.jsx · oracleText.js', 'Takeover.jsx', 'limits.js'], nums: [['1.240', 'mensajes en un mes']] },
     { id: 'sentidos', man: 'm-datos', icon: '👀', name: 'Sentidos', sub: 'percibe', title: 'Lo que ve y oye',
       say: 'Mira tu agenda, tu correo, tus fotos y tus archivos para saber de qué hablarte.',
-      does: ['📎 Adjuntos: fotos, PDF (también escaneados), Word, texto, CSV y correos, hasta 5 por mensaje', 'Tu vida laboral en PDF: la lee la propia app, sin DNI ni número de la Seguridad Social', 'Google Calendar: tu semana y lo que viene', 'Gmail: tus correos y tus alertas de empleo', 'Indeed: ofertas de trabajo con tu conector'],
+      does: ['📎 Adjuntos: fotos, PDF (también escaneados), Word, texto, CSV y correos, hasta 5 por mensaje', 'Tu vida laboral en PDF: la lee la propia app, sin DNI ni número de la Seguridad Social', 'Google Calendar: tu semana y lo que viene', 'Gmail: lo mira sola al abrir y cada 15 minutos (recibos, lo importante, tus alertas de empleo)', 'Indeed: ofertas de trabajo con tu conector'],
       files: ['attach.js · AttachButton.jsx', 'career.js · parseVidaLaboral', 'calendar.js', 'gmail.js', 'jobs.js'], nums: [['4', 'conectores'], ['15', 'herramientas de conector'], ['5', 'adjuntos por mensaje']] },
     { id: 'manos', man: 'm-datos', icon: '✋', name: 'Manos', sub: 'actúa', title: 'Lo que hace por ti',
       say: 'Le cuentas las cosas y ella las apunta, preguntando lo que falte. Lo que sale de casa lo envías tú.',
-      does: ['Circle: añade gente, apunta cuándo hablasteis, y tus contactos de Google por vCard', 'Despensa, Economía y deudas, también desde la foto del tique', 'Calendar: crea eventos y avisos al móvil (ivy_nudge)', 'Correo y WhatsApp: los escribe y los dejas listos; solo salen con tu dedo', 'CV en Word a medida, ofertas guardadas y seguimiento de candidaturas', 'Unas 40 herramientas: en cada mensaje entran primero las del tema del que hablas'],
+      does: ['Circle: añade gente, apunta cuándo hablasteis, y tus contactos de Google por vCard', 'Despensa, Economía y deudas, también desde la foto del tique', 'Calendar: crea eventos y avisos al móvil (ivy_nudge)', 'Correo y WhatsApp: los escribe y los dejas listos; solo salen con tu dedo', 'Borra correos (a la papelera de Gmail) cuando se lo pides, tras tu Confirmar', 'CV en Word a medida, ofertas guardadas y seguimiento de candidaturas', 'Unas 40 herramientas: en cada mensaje entran primero las del tema del que hablas'],
       files: ['actions.js', 'career.js · cvDocx.js', 'whatsapp.js · replies.js', 'pantry.js · money.js · circle.js'], nums: [['8', 'personas'], ['30', 'productos'], ['46', 'movimientos']] },
     { id: 'venas', man: 'm-datos', icon: '🩸', name: 'Venas', sub: 'datos', title: 'Por dónde viaja todo',
-      say: 'Tu cuenta para lo privado, tu Drive para lo compartido.',
-      does: ['Chat, memoria y perfil profesional en la base de datos privada del artifact', 'Mezcla entre dispositivos: nunca se pisa, lo borrado no vuelve', 'El slang se parte en trozos cuando no cabe en uno', 'Las apps hermanas comparten un JSON por app en tu Drive'],
-      files: ['sync.js', 'driveStore.js', 'parts/career'], nums: [['12', 'documentos privados'], ['4', 'archivos en Drive']] },
+      say: 'Tu cuenta para lo privado, la carpeta Ivy de tu Drive para lo compartido y para tu otra cuenta.',
+      does: ['Chat, memoria y perfil profesional en la base de datos privada del artifact', 'Una copia de lo privado en Drive (Memoria, Chat por meses, Copias semanales) para que tus dos cuentas de Claude sean una sola Ivy', 'Mezcla entre dispositivos y cuentas: nunca se pisa, lo borrado no vuelve', '♻️ Papelera de 30 días y 🔒 cifrado opcional con tu contraseña', '📎 Tus adjuntos, en Drive por meses', 'Las apps hermanas comparten un JSON por app en la carpeta Ivy'],
+      files: ['sync.js', 'driveSync.js', 'driveStore.js', 'trash.js', 'vault.js'], nums: [['12', 'documentos privados'], ['4', 'archivos en Drive']] },
     { id: 'memoria', man: 'm-datos', icon: '📓', name: 'Memoria', sub: 'te conoce', title: 'Lo que sabe de ti',
       say: 'Se acuerda de tu vida, tus planes, lo que te mandó hacer y de tu vida laboral.',
       does: ['Datos sobre ti que aprende en cada mensaje', 'Diario por días y repaso de memoria', 'Planes y pendientes, y las órdenes que te da', '💼 Perfil profesional: trabajos, estudios, habilidades, CVs, ofertas y simulacros de entrevista', 'Chat entero, buscable'],
