@@ -376,7 +376,7 @@ npm run release   # release/: 4 HTML + permisos</pre></li>
       // 📮 No server behind this site: the message goes to a Google Apps Script of the Ivy team (deploy/atc-apps-script.gs)
       // that keeps it in their Drive, in Ivy/Atención al cliente; Ivy shows it in "📮 Atención al cliente" with a reply.
       // "Sent" only when the script says it was saved; otherwise the message stays and there's an email way out.
-      const ATC_ENDPOINT = ''
+      const ATC_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxP_eKpBTwhb3To5EguBWtgjvBFka2HTNab_xNlF7gbz0f3vhX2JPVjaH6XJQ1BI8hraw/exec'
       const form = document.getElementById('contacto-form')
       const fail = document.getElementById('contacto-fail')
       const sendBtn = document.getElementById('contacto-send')
