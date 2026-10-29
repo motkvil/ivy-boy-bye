@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ivy · El inglés que no te enseñaron en clase</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Tu profe de inglés con actitud de barrio: te corrige al momento, te enseña a sonar como un nativo y te lleva la compra, el dinero y la agenda. Gratis con tu cuenta de Claude.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/ivy-180.png">
+<link rel="canonical" href="https://motkvil.github.io/ivy-boy-bye/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ivy">
+<meta property="og:title" content="Ivy · El inglés que no te enseñaron en clase">
+<meta property="og:description" content="Tu profe de inglés con actitud de barrio: te corrige al momento, te enseña a sonar como un nativo y te lleva la compra, el dinero y la agenda. Gratis con tu cuenta de Claude.">
+<meta property="og:image" content="https://motkvil.github.io/ivy-boy-bye/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ivy, con pañuelo y aros, junto al titular: Inglés de la calle. Y la que te lleva la vida.">
+<meta property="og:url" content="https://motkvil.github.io/ivy-boy-bye/">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://motkvil.github.io/ivy-boy-bye/img/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* Manual de Ivy (docs/anatomia-y-manual.html): tinta de fondo, rosa = ella, violeta = lo que dice, tinta = tú,
+     amarillo = lo que importa. Cartel (Rubik Mono One) para títulos, DM Sans para leer, JetBrains Mono para etiquetas.
+     Piezas como pegatinas: borde de tinta y sombra dura desplazada. */
+  :root {
+    --ink: #0a0a0a; --page: #120b19; --slab: #1e0f33; --slab-2: #2a1548; --rule: #3d2266;
+    --paper: #fbf3ff; --soft: #c8b3e8; --pink: #ff2e93; --violet: #7b2ff0; --yellow: #ffe066; --green: #8cff6b;
+    --display: "Rubik Mono One", "Arial Black", Impact, sans-serif;
+    --body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--page); color: var(--paper); font: 400 17px/1.55 var(--body); -webkit-font-smoothing: antialiased;
+    background-image: radial-gradient(rgba(255, 46, 147, .07) 1px, transparent 1.3px); background-size: 6px 6px;
+  }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+
+  header.top { position: sticky; top: 0; z-index: 5; background: #000; border-bottom: 3px solid var(--pink); }
+  header.top .wrap { display: flex; align-items: center; gap: 14px; height: 60px; }
+  .logo { font-family: var(--display); font-size: 24px; color: var(--pink); text-decoration: none; letter-spacing: .02em; }
+  nav { display: flex; gap: 18px; margin-left: auto; font-family: var(--mono); font-size: 12.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); }
+  nav a { text-decoration: none; } nav a:hover { color: var(--pink); }
+  .lang { display: flex; border: 2px solid var(--rule); border-radius: 8px; overflow: hidden; }
+  .lang button { background: none; border: 0; color: var(--soft); font: 700 12px var(--mono); letter-spacing: .08em; padding: 6px 11px; cursor: pointer; }
+  .lang button.on { background: var(--pink); color: var(--ink); }
+  @media (max-width: 760px) { nav { display: none; } .lang { margin-left: auto; } }
+
+  .hero { padding: 64px 0 48px; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 44px; align-items: center; }
+  .hero h1 { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 6.2vw, 64px); line-height: 1.02; margin: 0 0 22px; text-wrap: balance; text-transform: uppercase; }
+  .hero h1 em { font-style: normal; color: var(--pink); }
+  .hero p.lead { font-size: 19px; color: var(--soft); margin: 0 0 28px; max-width: 34em; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 20px; border-radius: 12px; font-weight: 700; text-decoration: none; border: 3px solid var(--ink); background: var(--slab-2); color: var(--paper); box-shadow: 5px 5px 0 var(--ink); transition: transform .08s, box-shadow .08s; }
+  .btn.main { background: var(--pink); color: var(--ink); box-shadow: 5px 5px 0 var(--violet); }
+  .btn:active { transform: translate(3px, 3px); box-shadow: 2px 2px 0 var(--ink); }
+  .note { font-size: 13.5px; color: var(--soft); margin-top: 14px; }
+  .note a { color: var(--yellow); }
+  .phone { border: 3px solid var(--ink); border-radius: 34px; padding: 10px; background: var(--ink); box-shadow: 9px 9px 0 var(--violet); max-width: 330px; margin: 0 auto; transform: rotate(1.5deg); }
+  .phone img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 2; object-fit: cover; border-radius: 24px; }
+  @media (max-width: 860px) { .hero { grid-template-columns: minmax(0, 1fr); padding-top: 40px; } .phone { transform: none; } }
+
+  section { padding: 64px 0; border-top: 3px solid var(--ink); }
+  h2 { font-family: var(--display); font-weight: 400; font-size: clamp(24px, 4vw, 38px); margin: 0 0 12px; line-height: 1.1; text-wrap: balance; text-transform: uppercase; }
+  .sub { color: var(--soft); margin: 0 0 30px; max-width: 42em; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+  .card { background: var(--slab); border: 3px solid var(--ink); border-radius: 14px; padding: 18px; box-shadow: 5px 5px 0 var(--ink); min-width: 0; }
+  .card b { display: block; font-size: 17px; margin-bottom: 4px; }
+  .card span { color: var(--soft); font-size: 15px; }
+  .ico { font-size: 24px; display: block; margin-bottom: 8px; }
+  .shots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; max-width: 900px; margin-left: auto; margin-right: auto; }
+  .shots figure { margin: 0; }
+  .shots img { width: 100%; height: auto; aspect-ratio: 1 / 2; object-fit: cover; border-radius: 18px; border: 3px solid var(--ink); display: block; box-shadow: 6px 6px 0 var(--ink); }
+  .shots figure:nth-child(odd) img { box-shadow: 6px 6px 0 var(--violet); }
+  .shots figcaption { font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--pink); margin-top: 12px; text-align: center; }
+  @media (max-width: 860px) { .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+  .tabs { display: inline-flex; border: 2px solid var(--rule); border-radius: 12px; padding: 4px; gap: 4px; margin-bottom: 18px; flex-wrap: wrap; }
+  .tabs button { background: none; border: 0; color: var(--soft); font: inherit; font-size: 15px; padding: 9px 14px; border-radius: 8px; cursor: pointer; }
+  .tabs button.on { background: var(--pink); color: var(--ink); font-weight: 700; }
+  ol.steps { list-style: none; counter-reset: s; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+  ol.steps > li { counter-increment: s; background: var(--slab); border: 3px solid var(--ink); border-radius: 14px; padding: 16px 18px 16px 66px; position: relative; box-shadow: 5px 5px 0 var(--ink); min-width: 0; }
+  ol.steps > li::before { content: counter(s); position: absolute; left: 16px; top: 14px; width: 34px; height: 34px; border-radius: 50%; background: var(--pink); color: var(--ink); border: 3px solid var(--ink); font-family: var(--display); font-size: 14px; display: grid; place-items: center; }
+  ol.steps b { display: block; margin-bottom: 2px; }
+  ol.steps span, ol.steps li > div { color: var(--soft); font-size: 15px; }
+  ol.steps a { color: var(--yellow); }
+  code, .mono { font-family: var(--mono); font-size: 13px; background: var(--ink); border: 1px solid var(--rule); border-radius: 6px; padding: 1px 6px; color: var(--yellow); }
+  pre { font-family: var(--mono); font-size: 13px; background: var(--ink); border: 2px solid var(--ink); border-radius: 10px; padding: 12px 14px; overflow-x: auto; color: var(--paper); margin: 8px 0 0; }
+  .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .two .card { background: var(--slab-2); box-shadow: 3px 3px 0 var(--ink); }
+  @media (max-width: 700px) { .two { grid-template-columns: minmax(0, 1fr); } }
+  details { background: var(--slab); border: 3px solid var(--ink); border-radius: 14px; padding: 14px 18px; box-shadow: 4px 4px 0 var(--ink); }
+  details + details { margin-top: 12px; }
+  details[open] { box-shadow: 4px 4px 0 var(--violet); }
+  summary { cursor: pointer; font-weight: 700; }
+  summary::marker { color: var(--pink); }
+  details p { color: var(--soft); margin: 8px 0 0; font-size: 15px; }
+  .pill { display: inline-block; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; padding: 2px 9px; border-radius: 6px; border: 2px solid var(--ink); background: var(--yellow); color: var(--ink); margin-left: 6px; vertical-align: middle; }
+  /* Demo: a chat written beforehand (no Claude, no cost). Bubbles as in the app's punk theme */
+ .demo { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 28px; align-items: start; }
+ @media (max-width: 860px) { .demo { grid-template-columns: minmax(0, 1fr); } }
+ .picks { display: flex; flex-direction: column; gap: 10px; }
+ .pick { text-align: left; font: 500 16px/1.4 var(--body); color: var(--paper); background: var(--slab); border: 3px solid var(--ink); border-radius: 14px; padding: 12px 14px; box-shadow: 4px 4px 0 var(--ink); cursor: pointer; }
+ .pick small { display: block; font: 500 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--pink); margin-bottom: 4px; }
+ .pick.on { box-shadow: 4px 4px 0 var(--pink); background: var(--slab-2); }
+ .pick:disabled { cursor: default; opacity: .55; }
+ .pick.on:disabled { opacity: 1; }
+ .chatbox { background: var(--ink); border: 3px solid var(--ink); border-radius: 26px; box-shadow: 8px 8px 0 var(--violet); padding: 14px; min-height: 440px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; min-width: 0; }
+ .chathead { display: flex; align-items: center; gap: 10px; padding: 2px 4px 10px; border-bottom: 2px solid var(--pink); }
+ .chathead img { border-radius: 50%; }
+ .chathead b { font-family: var(--display); font-weight: 400; color: var(--pink); font-size: 18px; }
+ .chathead span { font: 500 11px var(--mono); color: var(--green); letter-spacing: .06em; }
+ .chatlog { display: flex; flex-direction: column; gap: 10px; min-width: 0; padding: 2px 6px 6px 2px; }
+ .chatbox { scroll-margin-top: 76px; }
+ .bub { max-width: 88%; padding: 10px 14px; border-radius: 18px; font-size: 15.5px; line-height: 1.45; overflow-wrap: anywhere; animation: pop .25s ease-out; }
+ .bub.me { align-self: flex-end; background: #000; border: 2px solid var(--rule); box-shadow: 4px 4px 0 var(--violet); border-bottom-right-radius: 6px; }
+ .bub.her { align-self: flex-start; background: var(--violet); color: #fff; box-shadow: 4px 4px 0 var(--pink); border-bottom-left-radius: 6px; }
+ .bub.her em { font-style: normal; text-decoration: underline wavy var(--yellow); text-underline-offset: 3px; }
+ .typing { align-self: flex-start; display: flex; gap: 5px; padding: 12px 14px; background: var(--slab-2); border-radius: 18px; }
+ .typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--soft); animation: blink 1s infinite; }
+ .typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+ @keyframes blink { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
+ @keyframes pop { from { transform: translateY(6px); opacity: 0; } to { transform: none; opacity: 1; } }
+ .fix { align-self: flex-end; width: min(100%, 420px); background: var(--slab); border: 3px solid var(--ink); border-radius: 14px; box-shadow: 4px 4px 0 var(--pink); padding: 12px 14px; font-size: 14.5px; animation: pop .25s ease-out; }
+ .fix-tag { font: 700 12px var(--mono); letter-spacing: .06em; color: var(--yellow); margin-bottom: 8px; }
+ .fix-row { padding: 8px 0; border-top: 1px dashed var(--rule); }
+ .fix-row:first-of-type { border-top: 0; padding-top: 0; }
+ .fix del { color: #ff8a8a; text-decoration-thickness: 2px; }
+ .fix ins { text-decoration: none; color: var(--ink); background: var(--green); border-radius: 5px; padding: 0 5px; font-weight: 700; }
+ .fix p { margin: 4px 0 0; color: var(--soft); }
+ .fix .formula { display: inline-block; margin-top: 6px; font: 500 12px var(--mono); color: var(--yellow); background: var(--ink); border: 1px solid var(--rule); border-radius: 6px; padding: 2px 7px; }
+ .native { margin-top: 10px; padding-top: 10px; border-top: 2px solid var(--rule); display: flex; gap: 8px; align-items: flex-start; }
+ .native button { flex: none; background: var(--pink); color: var(--ink); border: 2px solid var(--ink); border-radius: 8px; cursor: pointer; font-size: 14px; padding: 2px 7px; }
+ .where { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+ .where > span { font: 500 11.5px var(--mono); border-radius: 999px; padding: 3px 9px; border: 2px solid var(--ink); }
+ .where > .ok { background: var(--green); color: var(--ink); }
+ .where > .no { background: #3a1020; color: #ff8a8a; text-decoration: line-through; }
+ .demo-end { align-self: center; margin-top: 4px; font-size: 14px; color: var(--soft); text-align: center; animation: pop .25s ease-out; }
+ .demo-end a { color: var(--yellow); }
+ .chat-empty { margin: auto; color: var(--soft); font-size: 15px; text-align: center; max-width: 22em; }
+ @media (prefers-reduced-motion: reduce) { .bub, .fix, .demo-end { animation: none; } .typing i { animation: none; opacity: .6; } }
+ .icon-tip { display: flex; gap: 14px; align-items: center; margin-top: 12px; background: var(--slab-2); border: 3px solid var(--ink); border-radius: 14px; padding: 12px 14px; box-shadow: 3px 3px 0 var(--ink); }
+ .icon-tip img { flex: none; border-radius: 50%; align-self: flex-start; }
+ .icon-tip span { font-size: 14.5px; color: var(--soft); }
+ .icon-tip a { color: var(--yellow); }
+ footer { border-top: 3px solid var(--pink); background: #000; padding: 30px 0 50px; color: var(--soft); font-size: 14px; }
+  footer .logo { font-size: 18px; margin-right: 8px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } .phone { transform: none; } }
+  /* Atención al cliente: el formulario manda a un Apps Script del equipo, que lo guarda en su Drive (deploy/atc-apps-script.gs) */
+  .contact { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 28px; align-items: start; }
+  @media (max-width: 860px) { .contact { grid-template-columns: minmax(0, 1fr); } }
+  form.ask { background: var(--slab); border: 3px solid var(--ink); border-radius: 16px; padding: 20px; box-shadow: 7px 7px 0 var(--violet); display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  form.ask label { display: flex; flex-direction: column; gap: 6px; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); }
+  form.ask input, form.ask select, form.ask textarea { font: 400 16px/1.4 var(--body); color: var(--paper); background: var(--ink); border: 2px solid var(--rule); border-radius: 10px; padding: 11px 12px; min-width: 0; width: 100%; text-transform: none; letter-spacing: 0; }
+  form.ask textarea { min-height: 130px; resize: vertical; }
+  form.ask input:focus, form.ask select:focus, form.ask textarea:focus { outline: none; border-color: var(--pink); }
+  form.ask .row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  @media (max-width: 560px) { form.ask .row2 { grid-template-columns: minmax(0, 1fr); } }
+  form.ask .consent { flex-direction: row; align-items: flex-start; gap: 10px; text-transform: none; letter-spacing: 0; font-family: var(--body); font-size: 14px; }
+  form.ask .consent input { width: 20px; height: 20px; flex: none; accent-color: var(--pink); margin-top: 2px; }
+  form.ask button { align-self: flex-start; font: 700 16px var(--body); cursor: pointer; }
+  .ask-fail { background: var(--ink); border: 2px solid var(--pink); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+ .ask-fail p { margin: 0; font-size: 14.5px; color: var(--paper); }
+ form.ask button:disabled { opacity: .6; cursor: default; }
+ .hidden-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .privacy { font-size: 13.5px; color: var(--soft); }
+  footer .legal { display: block; margin-top: 10px; font-size: 13px; max-width: 52em; }
+  footer .legal a { color: var(--yellow); }
+  html:not([lang="en"]) [data-en], html[lang="en"] [data-es] { display: none !important; }
+
+ /* Proposals: the bar to jump between them, and the pieces only they have */
+ .switcher { display: flex; justify-content: center; gap: 6px; padding: 6px 10px; background: var(--yellow); border-bottom: 2px solid var(--ink); font: 700 12px var(--mono); letter-spacing: .06em; }
+ .switcher a { color: var(--ink); text-decoration: none; padding: 3px 12px; border-radius: 999px; border: 2px solid transparent; }
+ .switcher a.on { background: var(--ink); color: var(--yellow); }
+ .story { max-width: 44em; }
+ .story p { font-size: 18px; color: var(--paper); margin: 0 0 16px; }
+ .story p.kick { font-size: 20px; color: var(--pink); font-weight: 700; }
+ .day { list-style: none; padding: 0; margin: 0 0 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+ .day li { background: var(--slab); border: 3px solid var(--ink); border-radius: 14px; padding: 16px 18px; box-shadow: 5px 5px 0 var(--violet); min-width: 0; }
+ .day .when { display: block; font: 500 12px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--pink); margin-bottom: 6px; }
+ .day span:not(.when) { color: var(--paper); font-size: 15.5px; }
+ .blocks .card ul { margin: 8px 0 0; padding-left: 18px; color: var(--soft); font-size: 15px; }
+ .blocks .card li { margin: 3px 0; }
+ .cta-end { text-align: center; padding: 72px 0; border-top: 3px solid var(--ink); }
+ .cta-end h2 { font-size: clamp(28px, 5.4vw, 52px); margin-bottom: 14px; }
+ .cta-end p { color: var(--soft); margin: 0 auto 26px; max-width: 34em; }
+ .cta-end .btn { font-size: 18px; }
+ details.tech { margin-top: 18px; }
+ .say { font-size: 18px; color: var(--paper); max-width: 44em; }
+</style>
+</head>
+<body>
+<nav class="switcher" aria-label="Propuestas"><a href="propuesta-a.html" class=on aria-current=page>A</a><a href="propuesta-b.html">B</a><a href="propuesta-c.html">C</a><a href="./">Actual</a></nav>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#" aria-label="Ivy">IVY</a>
+    <nav>
+      <a href="#demo"><span data-es>Pruébala</span><span data-en>Try her</span></a>
+      <a href="#que"><span data-es>Un día con Ivy</span><span data-en>A day with Ivy</span></a>
+      <a href="#datos"><span data-es>Tus datos</span><span data-en>Your data</span></a>
+      <a href="#instalar"><span data-es>Instalar</span><span data-en>Install</span></a>
+      <a href="#personajes"><span data-es>Personajes</span><span data-en>Characters</span></a>
+      <a href="#empresas"><span data-es>Empresas</span><span data-en>Companies</span></a>
+      <a href="#faq"><span data-es>FAQ</span><span data-en>FAQ</span></a>
+      <a href="#contacto"><span data-es>Contacto</span><span data-en>Contact</span></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button data-lang="es" class="on">ES</button><button data-lang="en">EN</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <h1><span data-es>El inglés que no te enseñaron <em>en clase.</em></span><span data-en>The English they never <em>taught you in class.</em></span></h1>
+      <p class="lead" data-es>Ivy es tu profe de inglés con actitud de barrio. Le escribes como te salga, te corrige al momento y te enseña a sonar como un nativo. Y ya que está, te lleva la compra, el dinero y la agenda.</p><p class="lead" data-en>Ivy is your English tutor with a street attitude. Write to her however it comes out: she corrects you on the spot and teaches you to sound like a native. And while she's at it, she keeps track of your shopping, your money and your calendar.</p>
+      <div class="ctas">
+        <a class="btn main" id="get-ivy" href="descargas/ivy-boy-bye.zip" download><span data-es>Quiero a Ivy</span><span data-en>I want Ivy</span> ↓</a>
+        <a class="btn" href="#instalar"><span data-es>Cómo se instala</span><span data-en>How to install</span></a>
+      </div>
+      <p class="note" data-es>Gratis con tu cuenta de Claude. Lista en 5 minutos.</p><p class="note" data-en>Free with your Claude account. Ready in 5 minutes.</p>
+    </div>
+    <div class="phone"><img src="img/chat.png?v=2" alt="Ivy corrigiendo un mensaje en el chat" width="390" height="780"></div>
+  </div>
+
+  <section id="historia">
+    <h2 data-es>¿Te suena esto?</h2><h2 data-en>Sound familiar?</h2>
+    
+    <div class="story">
+      <p data-es>Llevas años con cursos, academias y apps. Te sabes los verbos irregulares de memoria. Y aun así, cuando toca hablar, te sale un <b>"I am agree"</b>.</p><p data-en>Years of courses, classes and apps. You know the irregular verbs by heart. And still, when it's time to talk, out comes an <b>"I am agree"</b>.</p>
+      <p data-es>No es culpa tuya. En clase te enseñan el inglés del libro. El de la calle, el de los colegas, el de las series y el del curro, ese no te lo enseña nadie.</p><p data-en>It's not your fault. In class they teach you textbook English. The English of the street, your friends, the shows you watch and your job? Nobody teaches you that.</p>
+      <p class="kick" data-es>Ivy es como esa amiga del Bronx que te corrige sin cortarse: te dice qué has dicho mal, por qué, y cómo lo diría un nativo. Con cariño. A su manera.</p><p class="kick" data-en>Ivy is like that friend from the Bronx who corrects you without holding back: what you got wrong, why, and how a native would say it. With love. Her kind of love.</p>
+    </div>
+  </section>
+
+  <section id="demo">
+    <h2 data-es>Pruébala ahora</h2><h2 data-en>Try her now</h2>
+    <p class="sub" data-es>Elige una frase con fallos y mira cómo te corrige. Esto es una muestra: la Ivy de verdad te contesta a lo que tú le escribas.</p><p class="sub" data-en>Pick a sentence with mistakes and see how she corrects it. This is a sample: the real Ivy answers whatever you write.</p>
+    <div class="demo">
+      <div class="picks" id="picks" role="group" aria-label="Frases de ejemplo"></div>
+      <div class="chatbox">
+        <div class="chathead"><img src="img/ivy-180.png" alt="" width="34" height="34"><b>IVY</b><span id="demo-state">● online</span></div>
+        <div class="chatlog" id="chatlog" aria-live="polite"><p class="chat-empty"><span data-es>👈 Elige una frase y mándasela.</span><span data-en>👈 Pick a sentence and send it.</span></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="que">
+    <h2 data-es>Un día con Ivy</h2><h2 data-en>A day with Ivy</h2>
+    <p class="sub" data-es>No es otra app de ejercicios. Es alguien con quien hablas cada día, y que de paso te ordena la vida.</p><p class="sub" data-en>It's not another exercise app. It's someone you talk to every day, who happens to sort your life out too.</p>
+    <ol class="day">
+      <li><span class="when">🌅 <span data-es>Mañana</span><span data-en>Morning</span></span><span data-es>Le cuentas tus planes en inglés, como te salga. Te corrige al momento y te dice cómo lo diría un nativo.</span><span data-en>You tell her your plans in English, however it comes out. She corrects you on the spot and tells you how a native would say it.</span></li>
+      <li><span class="when">☀️ <span data-es>Mediodía</span><span data-en>Midday</span></span><span data-es>Te llega un correo del trabajo en inglés. Te lo explica en español y te deja la respuesta escrita. Solo sale cuando tú tocas Enviar.</span><span data-en>A work email in English lands. She explains it in Spanish and leaves the reply written. It only goes out when you tap Send.</span></li>
+      <li><span class="when">🛒 <span data-es>Tarde</span><span data-en>Afternoon</span></span><span data-es>Le dices lo que has comprado. Apunta el gasto, guarda la comida en tu despensa y te avisa antes de que caduque.</span><span data-en>You tell her what you bought. She logs the spending, adds the food to your pantry and warns you before it goes off.</span></li>
+      <li><span class="when">🌙 <span data-es>Noche</span><span data-en>Night</span></span><span data-es>Repasas tus fallos de siempre con ejercicios cortos, hasta que dejas de cometerlos.</span><span data-en>You go over your usual mistakes with short drills, until you stop making them.</span></li>
+    </ol>
+    <div class="grid blocks">
+      <div class="card"><span class="ico">📚</span><b data-es>Aprende</b><b data-en>Learn</b><ul data-es><li>Te corrige cada mensaje y te lo explica en español.</li><li>Te dice dónde suena bien: con colegas, con tu jefa o en una entrevista.</li><li>Slang de verdad: toca una palabra subrayada y te dice qué significa.</li><li>Tiempos verbales, escucha y conversaciones de práctica con nota.</li></ul><ul data-en><li>She corrects every message and explains it in Spanish.</li><li>She tells you where it works: with friends, with your boss or in an interview.</li><li>Real slang: tap an underlined word to see what it means.</li><li>Verb tenses, listening and practice conversations with a grade.</li></ul></div>
+      <div class="card"><span class="ico">🗂️</span><b data-es>Organízate</b><b data-en>Get organised</b><ul data-es><li>Lo que hay en la nevera, lo que caduca y la lista de la compra.</li><li>Tus gastos y tu presupuesto, también con la foto del tique.</li><li>Tu agenda, con avisos que suenan en el móvil.</li><li>A quién le debes un mensaje, y te deja el WhatsApp escrito.</li></ul><ul data-en><li>What's in the fridge, what's about to expire and the shopping list.</li><li>Your spending and budget, even from a photo of the receipt.</li><li>Your calendar, with reminders that ring on your phone.</li><li>Who you owe a message, with the WhatsApp already written.</li></ul></div>
+      <div class="card"><span class="ico">💼</span><b data-es>Consigue curro</b><b data-en>Land a job</b><ul data-es><li>Lee tu informe de vida laboral y lo ordena por ti.</li><li>Te hace el CV en Word, a medida de cada oferta.</li><li>Te prepara la ficha para cuando te llama una empresa.</li><li>Ensaya la entrevista contigo y te pone nota.</li></ul><ul data-en><li>She reads your Spanish work-history report and sorts it out for you.</li><li>She writes your CV in Word, tailored to each job.</li><li>She preps a cheat sheet for when a company calls.</li><li>She rehearses the interview with you and grades you.</li></ul></div>
+    </div>
+    <div class="shots" style="margin-top:22px">
+      <figure><img src="img/chat.png?v=2" alt="Ivy corrige un mensaje: tres cambios con su porqué, la frase nativa y dónde suena bien" loading="lazy"><figcaption data-es>Correcciones</figcaption><figcaption data-en>Corrections</figcaption></figure>
+      <figure><img src="img/correo.png?v=2" alt="Tarjeta del correo en el chat, con un recibo apuntado en Economía" loading="lazy"><figcaption data-es>Tu correo, explicado</figcaption><figcaption data-en>Your email, explained</figcaption></figure>
+      <figure><img src="img/llamada.png?v=2" alt="Ficha para la llamada de una empresa en LinkDeed" loading="lazy"><figcaption data-es>Me están llamando</figcaption><figcaption data-en>They're calling me</figcaption></figure>
+      <figure><img src="img/despensa.png?v=2" alt="La app Despensa con lo que caduca" loading="lazy"><figcaption data-es>Despensa</figcaption><figcaption data-en>Pantry</figcaption></figure>
+      <figure><img src="img/pantalla.png?v=2" alt="Modo pantalla: la frase de Ivy como un cartel" loading="lazy"><figcaption data-es>Modo pantalla</figcaption><figcaption data-en>Screen mode</figcaption></figure>
+      <figure><img src="img/tiempos.png?v=2" alt="Ficha del present perfect con su fórmula y comparado con el español" loading="lazy"><figcaption data-es>Tiempos verbales</figcaption><figcaption data-en>Verb tenses</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="datos">
+    <h2 data-es>Tu vida es tuya. Y se queda contigo.</h2><h2 data-en>Your life is yours. And it stays with you.</h2>
+    <p class="sub" data-es>Ivy no tiene servidores: lo tuyo se guarda en tu cuenta de Claude y en tu Google Drive. Nadie más lo ve, ni siquiera quien hizo Ivy.</p><p class="sub" data-en>Ivy has no servers: your stuff is kept in your Claude account and your Google Drive. Nobody else sees it, not even whoever made Ivy.</p>
+    <div class="grid">
+      <div class="card"><span class="ico">✋</span><b data-es>Tú tienes la última palabra</b><b data-en>You have the last word</b><span data-es>Nada sale sin que lo toques tú: ni un correo ni un borrado. Y todo lo que apunta se puede deshacer.</span><span data-en>Nothing goes out unless you tap it: no email, no delete. And everything she writes down can be undone.</span></div>
+      <div class="card"><span class="ico">♻️</span><b data-es>Lo borrado vuelve</b><b data-en>Deleted comes back</b><span data-es>¿Te arrepientes? Tienes 30 días para recuperarlo.</span><span data-en>Changed your mind? You have 30 days to get it back.</span></div>
+      <div class="card"><span class="ico">🔒</span><b data-es>Con candado, si quieres</b><b data-en>Locked, if you want</b><span data-es>Ponle contraseña a tu memoria y a tu chat en Drive: quien entre en tu Drive no podrá leerlos.</span><span data-en>Put a password on your memory and chat in Drive: anyone getting into your Drive won't be able to read them.</span></div>
+      <div class="card"><span class="ico">🗂️</span><b data-es>Una copia cada semana</b><b data-en>A backup every week</b><span data-es>Ivy guarda una copia completa cada semana, y te descargas todo cuando quieras.</span><span data-en>Ivy keeps a full backup every week, and you can download everything whenever you like.</span></div>
+      <div class="card"><span class="ico">🪪</span><b data-es>Lo sensible no viaja</b><b data-en>Sensitive stuff doesn't travel</b><span data-es>Cuando le pasas tu vida laboral, tu DNI, tu número de la Seguridad Social y tu dirección no se le mandan a Claude.</span><span data-en>When you give her your work history, your ID, social security number and address aren't sent to Claude.</span></div>
+    </div>
+  </section>
+
+  <section id="instalar">
+    <h2 data-es>Lista en 5 minutos. Sin pagar nada más.</h2><h2 data-en>Ready in 5 minutes. Nothing else to pay.</h2>
+    <p class="sub" data-es>Solo necesitas una cuenta de Claude (vale la gratuita) y tu cuenta de Google. Se puede hacer todo desde el móvil.</p><p class="sub" data-en>All you need is a Claude account (the free one works) and your Google account. You can do it all from your phone.</p>
+    <ol class="steps">
+      <li><b data-es>Hazte una cuenta en Claude</b><b data-en>Get a Claude account</b><span data-es>En <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>. Vale la gratuita.</span><span data-en>At <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>. The free one works.</span></li>
+      <li><b data-es>Conecta tu Google</b><b data-en>Connect your Google</b><span data-es>En Ajustes → Conectores, activa Google Drive, Calendar y Gmail.</span><span data-en>In Settings → Connectors, turn on Google Drive, Calendar and Gmail.</span></li>
+      <li><b data-es>Descarga Ivy</b><b data-en>Download Ivy</b><span data-es>Es un archivo: <a href="descargas/ivy-boy-bye.zip" download>ivy-boy-bye.zip</a>.</span><span data-en>It's one file: <a href="descargas/ivy-boy-bye.zip" download>ivy-boy-bye.zip</a>.</span></li>
+      <li><b data-es>Pídele a Claude que la instale</b><b data-en>Ask Claude to install her</b><span data-es>Abre un chat nuevo, adjunta el archivo y pega el mensaje que viene dentro. Claude te da tu enlace.</span><span data-en>Open a new chat, attach the file and paste the message inside it. Claude gives you your link.</span></li>
+      <li><b data-es>Ábrela y dale permiso</b><b data-en>Open her and say yes</b><span data-es>Acepta lo que te pida: es tu Ivy y lo que ve se queda en tu cuenta.</span><span data-en>Accept what she asks for: she's your Ivy and what she sees stays in your account.</span></li>
+      <li><b data-es>Ponla en tu móvil</b><b data-en>Put her on your phone</b><span data-es>Guárdala en la pantalla de inicio y se abre como una app:</span><span data-en>Save her to your home screen and she opens like an app:</span>
+        <div class="two" style="margin-top:8px">
+          <div class="card"><b>iPhone</b><span data-es>En Safari: botón <b style="display:inline">Compartir</b> (cuadrado con flecha) → <b style="display:inline">Añadir a pantalla de inicio</b> → Añadir.</span><span data-en>In Safari: <b style="display:inline">Share</b> button (square with arrow) → <b style="display:inline">Add to Home Screen</b> → Add.</span></div>
+          <div class="card"><b>Android</b><span data-es>En Chrome: menú <b style="display:inline">⋮</b> → <b style="display:inline">Añadir a pantalla de inicio</b> (o "Instalar") → Añadir.</span><span data-en>In Chrome: <b style="display:inline">⋮</b> menu → <b style="display:inline">Add to Home screen</b> (or "Install") → Add.</span></div>
+        </div>
+        <div class="icon-tip">
+          <img src="img/ivy-180.png" alt="" width="64" height="64" loading="lazy">
+          <div>
+            <span data-es>El icono que pone el móvil lo elige Claude, no Ivy: sale un dibujo gris. ¿La quieres con su cara? Descarga <a href="img/ivy-icono.png" download>su icono</a> y crea el acceso con una app como <b style="display:inline">Shortcut Maker</b> (Android) o <b style="display:inline">Atajos</b> (iPhone: un atajo con "Abrir URL" → Añadir a pantalla de inicio → toca el icono y elige la imagen), con el enlace de tu Ivy.</span>
+            <span data-en>The icon your phone shows is picked by Claude, not Ivy: you get a grey drawing. Want her face on it? Download <a href="img/ivy-icono.png" download>her icon</a> and make the shortcut with an app like <b style="display:inline">Shortcut Maker</b> (Android) or <b style="display:inline">Shortcuts</b> (iPhone: a shortcut with "Open URLs" → Add to Home Screen → tap the icon and pick the image), using your Ivy link.</span>
+          </div>
+        </div>
+</li>
+      <li><b data-es>Escríbele</b><b data-en>Text her</b><span data-es>En inglés, como te salga. Ella hace el resto.</span><span data-en>In English, however it comes out. She does the rest.</span></li>
+    </ol>
+  </section>
+
+  <section id="personajes">
+    <h2 data-es>¿Ivy es demasiado para ti? Crea tu propio profe.</h2><h2 data-en>Is Ivy too much for you? Create your own tutor.</h2>
+    <p class="sub" data-es>Descríbelo en una frase ("una profe jubilada de Sevilla, dulce pero sin pelos en la lengua") y le da nombre, historia y forma de hablar. Tu progreso sigue siendo el mismo: solo cambia quién te habla.</p><p class="sub" data-en>Describe them in one line ("a retired teacher from Seville, sweet but blunt") and they get a name, a story and a voice. Your progress stays the same: only who's talking changes.</p>
+    <div class="grid">
+      <div class="card"><span class="ico">🌺</span><b data-es>Ivy</b><b data-en>Ivy</b><span data-es>Del Bronx y vecina de L'Hospitalet. Vacilona, leal y sin filtro. La original.</span><span data-en>From the Bronx, living in L'Hospitalet. Teasing, loyal and unfiltered. The original.</span></div>
+      <div class="card"><span class="ico">🎭</span><b data-es>El tuyo</b><b data-en>Yours</b><span data-es>El profe que tú te inventes. Y si solo quieres menos tacos, bajas el tono de Ivy en el menú.</span><span data-en>The tutor you make up. And if you just want less swearing, turn Ivy's tone down in the menu.</span></div>
+    </div>
+  </section>
+
+  <section id="empresas">
+    <h2 data-es>Lleva Ivy a tu empresa</h2><h2 data-en>Bring Ivy to your company</h2>
+    <p class="sub" data-es>Inglés para tu equipo, con el carácter que quieras: montamos tu propia copia de Ivy, con vuestros personajes y en vuestras cuentas. Cuéntanos qué necesitas.</p><p class="sub" data-en>English for your team, with whatever personality you want: we set up your own copy of Ivy, with your characters, in your accounts. Tell us what you need.</p>
+    <a class="btn main" href="#contacto"><span data-es>Hablemos</span><span data-en>Let's talk</span></a>
+    <details class="tech"><summary><span data-es>Para el equipo técnico: cómo se monta tu copia</span><span data-en>For your tech team: how your copy is set up</span></summary>
+    <ol class="steps">
+      <li><b data-es>Consigue el repositorio</b><b data-en>Get the repository</b><span data-es>Es privado y propietario: pide acceso al propietario.</span><span data-en>It's private and proprietary: ask the owner for access.</span></li>
+      <li><b data-es>Prepara los archivos</b><b data-en>Build the files</b><pre>npm install &amp;&amp; npm --prefix circle install
+npm run test:all
+npm run release   # release/: 4 HTML + permisos</pre></li>
+      <li><b data-es>Publica con Claude Code</b><b data-en>Publish with Claude Code</b><span data-es>Abre Claude Code con el repositorio y pídele que publique los cuatro HTML de <code>release/</code> con los permisos de <code>deploy/permisos/</code>. La guía completa está en <code>docs/INSTALAR.md</code>.</span><span data-en>Open Claude Code on the repository and ask it to publish the four HTML files in <code>release/</code> with the permissions in <code>deploy/permisos/</code>. The full guide is <code>docs/INSTALAR.md</code>.</span></li>
+      <li><b data-es>Hazla tuya</b><b data-en>Make it yours</b><span data-es>Pon las URLs de tus artifacts en <code>src/links.js</code>, crea tus personajes desde el menú 🎭 y compártela con tu gente.</span><span data-en>Put your artifact URLs in <code>src/links.js</code>, create your characters from the 🎭 menu and share it with your people.</span></li>
+    </ol>
+    <div class="two" style="margin-top:20px">
+      <a class="card" href="anatomia/" style="text-decoration:none"><span class="ico">🫀</span><b data-es>Anatomía y manual de marca</b><b data-en>Anatomy and brand manual</b><span data-es>Cómo está hecha Ivy por dentro, el viaje de un mensaje y el manual corporativo y de diseño: voz, logotipo, color, tipografía y piezas.</span><span data-en>How Ivy is built, the trip of one message, and the corporate and design manual: voice, logo, colour, type and components.</span></a>
+      <a class="card" href="mapa/" style="text-decoration:none"><span class="ico">🗺️</span><b data-es>Mapa de datos</b><b data-en>Data map</b><span data-es>Cómo entra, se guarda, se cuida y sale la información: qué fuentes lee, dónde vive cada dato y quién decide sobre él.</span><span data-en>How information comes in, is kept, looked after and goes out: what it reads, where each piece lives and who decides over it.</span></a>
+    </div>
+    </details>
+  </section>
+
+  <section id="faq">
+    <h2 data-es>Preguntas</h2><h2 data-en>Questions</h2>
+    <details><summary><span data-es>¿Cuánto cuesta?</span><span data-en>How much does it cost?</span></summary><p data-es>Nada aparte: Ivy usa tu plan de Claude, también el gratuito. Con un plan de pago aguanta más mensajes al día. Sin suscripciones ni pagos por mensaje.</p><p data-en>Nothing extra: Ivy uses your Claude plan, free ones included. A paid plan lasts for more messages a day. No subscriptions, no per-message fees.</p></details>
+    <details><summary><span data-es>¿Dónde están mis datos?</span><span data-en>Where is my data?</span></summary><p data-es>El chat y tu progreso, en tu cuenta de Claude. La despensa, el dinero, tu gente y tus personajes, en tu Google Drive. Nadie más los ve.</p><p data-en>Your chat and progress live in your Claude account. Pantry, money, people and characters live in your Google Drive. Nobody else sees them.</p></details>
+    <details><summary><span data-es>¿Cómo la actualizo?</span><span data-en>How do I update it?</span></summary><p data-es>Descarga el archivo otra vez y pídele a Claude Code que publique los HTML nuevos sobre tus artifacts de siempre, con sus enlaces (si crea artifacts nuevos, el chat se queda en el viejo). Tu chat, tu progreso y tus datos se conservan.</p><p data-en>Download the file again and ask Claude Code to publish the new HTML files over your existing artifacts, using their links (new artifacts would leave your chat behind in the old one). Your chat, progress and data are kept.</p></details>
+    <details><summary><span data-es>¿Funciona sin Claude?</span><span data-en>Does it work without Claude?</span></summary><p data-es>No. Ivy vive dentro de Claude y habla con Claude por ti.</p><p data-en>No. Ivy lives inside Claude and talks to Claude for you.</p></details>
+    <details><summary><span data-es>¿iPhone y Android?</span><span data-en>iPhone and Android?</span></summary><p data-es>Los dos, desde el navegador o la app de Claude. La guardas en la pantalla de inicio y se abre como una app.</p><p data-en>Both, from the browser or the Claude app. Save it to your home screen and it opens like an app.</p></details>
+    <details><summary><span data-es>¿Envía correos o borra cosas sola?</span><span data-en>Does she send emails or delete things on her own?</span></summary><p data-es>Sola nunca envía un correo: te propone la respuesta en "📝 Por responder" y solo sale si tú la revisas y tocas Enviar. Todo lo que apunta tiene botón de deshacer, y para borrar te pide que confirmes.</p><p data-en>She never sends email on her own: she proposes the reply in "📝 Por responder" and it only goes out when you review it and tap Send. Everything she writes down has an undo button, and deleting always asks you to confirm.</p></details>
+    <details><summary><span data-es>Es muy malhablada, ¿se puede suavizar?</span><span data-en>She swears a lot, can I tone it down?</span></summary><p data-es>Sí: el interruptor "Sin filtro" baja los tacos. O crea un personaje con otro carácter.</p><p data-en>Yes: the "Unfiltered" switch tones the swearing down. Or create a character with a different temper.</p></details>
+    <details><summary><span data-es>¿Cómo funciona por dentro?</span><span data-en>How does it work inside?</span></summary><p data-es>Ivy son cuatro pequeñas apps (Ivy, Despensa, Economía y Circle) publicadas como "artifacts" en tu cuenta de Claude. Hablan con Claude usando tu plan y guardan lo compartido en tu Google Drive, en una carpeta "Ivy". El repaso de tus fallos usa repetición espaciada (vuelven cuando estás a punto de olvidarlos), y el candado opcional cifra tus datos de Drive con AES-256 a partir de tu contraseña.</p><p data-en>Ivy is four small apps (Ivy, Pantry, Money and Circle) published as "artifacts" in your Claude account. They talk to Claude using your plan and keep shared things in your Google Drive, in an "Ivy" folder. Reviewing your mistakes uses spaced repetition (they come back just before you'd forget them), and the optional lock encrypts your Drive data with AES-256 from your password.</p></details>
+  </section>
+</main>
+
+<section class="cta-end" id="empieza">
+  <div class="wrap">
+    <h2 data-es>Deja de estudiar inglés. Empieza a hablarlo.</h2><h2 data-en>Stop studying English. Start speaking it.</h2>
+    <p data-es>Cinco minutos para instalarla. El resto del día para hablar.</p><p data-en>Five minutes to install her. The rest of the day to talk.</p>
+    <a class="btn main" href="descargas/ivy-boy-bye.zip" download><span data-es>Descargar Ivy, es gratis</span><span data-en>Download Ivy, it's free</span> ↓</a>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap contact">
+    <div>
+      <h2><span data-es>Atención al cliente</span><span data-en>Customer support</span></h2>
+      <p class="sub" data-es>¿Ivy no se instala, algo falla o quieres Ivy para tu empresa? Escríbenos y te contestamos al correo que pongas.</p>
+      <p class="sub" data-en>Ivy won't install, something breaks or you want Ivy for your company? Write to us and we'll answer at the email you give.</p>
+      <p class="privacy" data-es>Tu mensaje llega al equipo de Ivy y se guarda en su Google Drive solo para contestarte: nombre, correo, motivo y mensaje, nada más. Para que lo borremos, pídelo aquí o en <a href="mailto:motokoviloria@gmail.com">motokoviloria@gmail.com</a>.</p>
+      <p class="privacy" data-en>Your message reaches the Ivy team and is kept in their Google Drive only to answer you: name, email, topic and message, nothing else. To have it deleted, ask here or at <a href="mailto:motokoviloria@gmail.com">motokoviloria@gmail.com</a>.</p>
+    </div>
+    <form class="ask" name="contacto" id="contacto-form">
+      <div class="row2">
+        <label><span data-es>Nombre</span><span data-en>Name</span><input name="nombre" required maxlength="80" autocomplete="name"></label>
+        <label><span data-es>Correo</span><span data-en>Email</span><input name="correo" type="email" required maxlength="120" autocomplete="email"></label>
+      </div>
+      <label><span data-es>Motivo</span><span data-en>Topic</span>
+        <select name="motivo" required>
+          <option value="instalacion" data-t-es="No consigo instalarla" data-t-en="I can't install it">No consigo instalarla</option>
+          <option value="fallo" data-t-es="Algo no funciona" data-t-en="Something doesn't work">Algo no funciona</option>
+          <option value="idea" data-t-es="Una idea o sugerencia" data-t-en="An idea or suggestion">Una idea o sugerencia</option>
+          <option value="empresa" data-t-es="Ivy para mi empresa" data-t-en="Ivy for my company">Ivy para mi empresa</option>
+          <option value="datos" data-t-es="Mis datos (borrarlos, consultarlos)" data-t-en="My data (delete, access)">Mis datos (borrarlos, consultarlos)</option>
+          <option value="otro" data-t-es="Otra cosa" data-t-en="Something else">Otra cosa</option>
+        </select>
+      </label>
+      <label><span data-es>Mensaje</span><span data-en>Message</span><textarea name="mensaje" required maxlength="4000"></textarea></label>
+      <label class="hidden-field" aria-hidden="true">Web<input name="web" tabindex="-1" autocomplete="off"></label>
+      <label class="consent"><input type="checkbox" name="acepto" value="si" required><span><span data-es>Acepto que uséis estos datos para contestarme.</span><span data-en>I agree you use this information to answer me.</span></span></label>
+      <button class="btn main" type="submit" id="contacto-send"><span data-es>Enviar</span><span data-en>Send</span></button>
+      <div class="ask-fail" id="contacto-fail" hidden>
+        <p data-es><b>No se ha podido enviar.</b> Tu mensaje sigue aquí: prueba otra vez en un momento o mándalo por correo.</p>
+        <p data-en><b>It couldn't be sent.</b> Your message is still here: try again in a moment or send it by email.</p>
+        <a class="btn" id="contacto-mail" href="mailto:motokoviloria@gmail.com"><span data-es>Mandarlo por correo</span><span data-en>Send it by email</span></a>
+      </div>
+    </form>
+    <script>
+      // 📮 No server behind this site: the message goes to a Google Apps Script of the Ivy team (deploy/atc-apps-script.gs)
+      // that keeps it in their Drive, in Ivy/Atención al cliente; Ivy shows it in "📮 Atención al cliente" with a reply.
+      // "Sent" only when the script says it was saved; otherwise the message stays and there's an email way out.
+      const ATC_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxP_eKpBTwhb3To5EguBWtgjvBFka2HTNab_xNlF7gbz0f3vhX2JPVjaH6XJQ1BI8hraw/exec'
+      const form = document.getElementById('contacto-form')
+      const fail = document.getElementById('contacto-fail')
+      const sendBtn = document.getElementById('contacto-send')
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        const f = e.target
+        const en = document.documentElement.lang === 'en'
+        const motivo = f.motivo.options[f.motivo.selectedIndex].textContent
+        const body = `${f.mensaje.value}\n\n— ${f.nombre.value} <${f.correo.value}>`
+        document.getElementById('contacto-mail').href = `mailto:motokoviloria@gmail.com?subject=${encodeURIComponent(`Ivy · ${motivo}`)}&body=${encodeURIComponent(body.slice(0, 1500))}`
+        fail.hidden = true
+        sendBtn.disabled = true
+        let ok = false
+        try {
+          if (ATC_ENDPOINT) {
+            // text/plain keeps it a simple request (no CORS preflight, which Apps Script doesn't answer)
+            const r = await fetch(ATC_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({
+              nombre: f.nombre.value, correo: f.correo.value, motivo: f.motivo.value, mensaje: f.mensaje.value, idioma: en ? 'en' : 'es', acepto: f.acepto.checked, web: f.web.value,
+            }) })
+            ok = (await r.json()).ok === true
+          }
+        } catch {
+          ok = false
+        }
+        sendBtn.disabled = false
+        if (ok) location.href = 'gracias/' + (en ? '?en' : '')
+        else fail.hidden = false
+      })
+    </script>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><span class="logo" aria-hidden="true">IVY</span> © 2026 motkvil · <span data-es>Todos los derechos reservados.</span><span data-en>All rights reserved.</span>
+    <span class="legal" data-es>Ivy es una inteligencia artificial que funciona con Claude, de Anthropic. Proyecto independiente, sin relación con Anthropic. · <a href="#contacto">Atención al cliente</a></span>
+    <span class="legal" data-en>Ivy is an artificial intelligence that runs on Claude, by Anthropic. Independent project, not affiliated with Anthropic. · <a href="#contacto">Customer support</a></span></div>
+</footer>
+
+<script>
+  const setLang = (l) => {
+    document.documentElement.lang = l
+    document.querySelectorAll('.lang button').forEach((b) => b.classList.toggle('on', b.dataset.lang === l))
+    try { localStorage.setItem('ivy-site-lang', l) } catch {}
+    // The options change their text (Safari ignores display: none on <option>)
+    document.querySelectorAll('form.ask option[data-t-es]').forEach((o) => { o.textContent = o.dataset[l === 'en' ? 'tEn' : 'tEs'] })
+  }
+  document.querySelectorAll('.lang button').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)))
+  let saved = null
+  try { saved = localStorage.getItem('ivy-site-lang') } catch {}
+  setLang(saved || ((navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en'))
+</script>
+<script>
+  // 🎬 The demo: a chat written beforehand, in Ivy's voice. Nothing goes to Claude
+  const T = (es, en = es) => `<span data-es>${es}</span><span data-en>${en}</span>`
+  const DEMOS = [
+    {
+      tag: T('Pasado', 'Past tense'),
+      me: 'Yesterday I go to the beach with my friends and we was very happy',
+      her: ['Beach day and nobody invited me? I see how it is. 👀', 'Next time say you <em>had a blast</em>. "Very happy" sounds like a birthday card from your aunt.'],
+      fixes: [
+        { from: 'I go', to: 'I went', why: T('Es ayer, así que va en pasado. <b>go</b> es irregular: su pasado es <b>went</b>.', "It's yesterday, so it's past. <b>go</b> is irregular: its past is <b>went</b>."), formula: T('Pasado simple: verbo en pasado (go → went)', 'Past simple: verb in the past (go → went)') },
+        { from: 'we was', to: 'we were', why: T('Con <b>we</b>, <b>you</b> y <b>they</b> el pasado de <b>be</b> es <b>were</b>. <b>was</b> solo con I, he, she, it.', 'With <b>we</b>, <b>you</b> and <b>they</b> the past of <b>be</b> is <b>were</b>. <b>was</b> only with I, he, she, it.') },
+      ],
+      native: 'Yesterday I went to the beach with my friends and we had a blast.',
+      where: [[T('🏙 calle', '🏙 street'), 1], [T('🍻 colegas', '🍻 friends'), 1], [T('💼 jefa', '💼 boss'), 1]],
+    },
+    {
+      tag: T('El verbo agree', 'The verb agree'),
+      me: 'I am agree with you, my boss is very boring',
+      her: ['Say it louder for the people in the back. 🙌', 'On the block we say your boss is <em>such a drag</em>. Just keep it off the work group chat.'],
+      fixes: [
+        { from: 'I am agree', to: 'I agree', why: T('En inglés <b>agree</b> ya es el verbo ("estar de acuerdo"): no lleva <b>am</b> delante.', 'In English <b>agree</b> is already the verb: no <b>am</b> in front.') },
+        { from: 'very boring', to: 'such a drag', why: T('No está mal, pero un nativo diría <b>such a drag</b> ("un muermo") hablando de una persona.', "Not wrong, but a native would say <b>such a drag</b> about a person.") },
+      ],
+      native: "I agree with you, my boss is such a drag.",
+      where: [[T('🏙 calle', '🏙 street'), 1], [T('🍻 colegas', '🍻 friends'), 1], [T('💼 jefa', '💼 boss'), 0]],
+    },
+    {
+      tag: T('Edad y desde cuándo', 'Age and since when'),
+      me: 'I have 30 years and I live in Barcelona since 2019',
+      her: ["Thirty and still talking like a tourist? We're fixing that today, mami.", "And it's <em>I've lived</em>: you still live there, so the clock is still running."],
+      fixes: [
+        { from: 'I have 30 years', to: "I'm 30", why: T('La edad va con <b>be</b>, no con <b>have</b>: <b>I\'m 30</b> o <b>I\'m 30 years old</b>.', "Age goes with <b>be</b>, not <b>have</b>: <b>I'm 30</b> or <b>I'm 30 years old</b>.") },
+        { from: 'I live … since', to: "I've lived … since", why: T('Algo que empezó en el pasado y sigue ahora, con <b>since</b>, va en presente perfecto. En español decimos "vivo desde"; en inglés, "he vivido desde".', 'Something that started in the past and still goes on, with <b>since</b>, takes the present perfect.'), formula: T('Presente perfecto: have/has + participio (lived)', 'Present perfect: have/has + past participle (lived)') },
+      ],
+      native: "I'm 30 and I've lived in Barcelona since 2019.",
+      where: [[T('🏙 calle', '🏙 street'), 1], [T('🍻 colegas', '🍻 friends'), 1], [T('💼 jefa', '💼 boss'), 1], [T('🎤 entrevista', '🎤 interview'), 1]],
+    },
+    {
+      tag: T('Explain me', 'Explain me'),
+      me: 'Can you explain me how to make the paella?',
+      her: ['Paella tips from a girl from the Bronx? Bold of you. 😂', "The recipe is your mom's department. The English is mine: it's <em>explain to me</em>."],
+      fixes: [
+        { from: 'explain me', to: 'explain to me', why: T('<b>explain</b> no lleva a la persona directa: <b>explain to me</b>. O más fácil: <b>Can you tell me…?</b>', "<b>explain</b> doesn't take the person directly: <b>explain to me</b>. Or easier: <b>Can you tell me…?</b>") },
+        { from: 'the paella', to: 'paella', why: T('Hablando de un plato en general, sin <b>the</b>: <b>make paella</b>, <b>eat sushi</b>.', 'Talking about a dish in general, no <b>the</b>: <b>make paella</b>, <b>eat sushi</b>.') },
+      ],
+      native: 'Can you tell me how to make paella?',
+      where: [[T('🏙 calle', '🏙 street'), 1], [T('🍻 colegas', '🍻 friends'), 1], [T('💼 jefa', '💼 boss'), 1]],
+    },
+  ]
+
+  const picks = document.getElementById('picks')
+  const log = document.getElementById('chatlog')
+  const stateEl = document.getElementById('demo-state')
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches
+  const wait = (ms) => new Promise((r) => setTimeout(r, calm ? 0 : ms))
+  const esc = (t) => t.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c])
+  let busy = false
+
+  const add = (html, cls) => {
+    const el = document.createElement('div')
+    el.className = cls
+    el.innerHTML = html
+    log.append(el)
+    return el
+  }
+  const say = (text) => {
+    try {
+      speechSynthesis.cancel()
+      const u = new SpeechSynthesisUtterance(text)
+      u.lang = 'en-US'
+      speechSynthesis.speak(u)
+    } catch {}
+  }
+
+  async function play(d, btn) {
+    if (busy) return
+    busy = true
+    picks.querySelectorAll('.pick').forEach((b) => { b.disabled = true; b.classList.toggle('on', b === btn) })
+    log.innerHTML = ''
+    // On a phone the chat is below the sentences: bring it into view once
+    const box = log.closest('.chatbox')
+    if (box.getBoundingClientRect().top > innerHeight * 0.6) box.scrollIntoView({ block: 'start', behavior: calm ? 'auto' : 'smooth' })
+    add(esc(d.me), 'bub me')
+    await wait(500)
+    for (const line of d.her) {
+      stateEl.innerHTML = T('● escribiendo…', '● typing…')
+      const dots = add('<i></i><i></i><i></i>', 'typing')
+      await wait(900 + line.length * 12)
+      dots.remove()
+      add(line, 'bub her')
+      await wait(350)
+    }
+    stateEl.textContent = '● online'
+    const rows = d.fixes.map((f) => `<div class="fix-row"><del>${esc(f.from)}</del> → <ins>${esc(f.to)}</ins><p>${f.why}</p>${f.formula ? `<span class="formula">${f.formula}</span>` : ''}</div>`).join('')
+    const n = d.fixes.length
+    const card = add(`<div class="fix-tag">✨ ${T(`${n} correcciones`, `${n} corrections`)}</div>${rows}
+      <div class="native"><button type="button" aria-label="Escuchar">🔊</button><span>${esc(d.native)}</span></div>
+      <div class="where">${d.where.map(([w, ok]) => `<span class="${ok ? 'ok' : 'no'}">${w}</span>`).join('')}</div>`, 'fix')
+    card.querySelector('.native button').addEventListener('click', () => say(d.native))
+    await wait(300)
+    add(T('Así con cada mensaje. <a href="#instalar">Instálala</a> y escríbele lo tuyo.', 'Like that with every message. <a href="#instalar">Install her</a> and write your own.'), 'demo-end')
+    picks.querySelectorAll('.pick').forEach((b) => { b.disabled = false })
+    busy = false
+  }
+
+  DEMOS.forEach((d) => {
+    const b = document.createElement('button')
+    b.type = 'button'
+    b.className = 'pick'
+    b.innerHTML = `<small>${d.tag}</small>${esc(d.me)}`
+    b.addEventListener('click', () => play(d, b))
+    picks.append(b)
+  })
+</script>
+</body>
+</html>
