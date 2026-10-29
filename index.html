@@ -156,7 +156,7 @@
  footer { border-top: 3px solid var(--pink); background: #000; padding: 30px 0 50px; color: var(--soft); font-size: 14px; }
   footer .logo { font-size: 18px; margin-right: 8px; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } .phone { transform: none; } }
-  /* Atención al cliente: Netlify Forms guarda cada envío en el panel del proyecto (Forms) y avisa por correo */
+  /* Atención al cliente: el formulario manda a un Apps Script del equipo, que lo guarda en su Drive (deploy/atc-apps-script.gs) */
   .contact { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 28px; align-items: start; }
   @media (max-width: 860px) { .contact { grid-template-columns: minmax(0, 1fr); } }
   form.ask { background: var(--slab); border: 3px solid var(--ink); border-radius: 16px; padding: 20px; box-shadow: 7px 7px 0 var(--violet); display: flex; flex-direction: column; gap: 14px; min-width: 0; }
@@ -169,7 +169,10 @@
   form.ask .consent { flex-direction: row; align-items: flex-start; gap: 10px; text-transform: none; letter-spacing: 0; font-family: var(--body); font-size: 14px; }
   form.ask .consent input { width: 20px; height: 20px; flex: none; accent-color: var(--pink); margin-top: 2px; }
   form.ask button { align-self: flex-start; font: 700 16px var(--body); cursor: pointer; }
-  .hidden-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .ask-fail { background: var(--ink); border: 2px solid var(--pink); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+ .ask-fail p { margin: 0; font-size: 14.5px; color: var(--paper); }
+ form.ask button:disabled { opacity: .6; cursor: default; }
+ .hidden-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   .privacy { font-size: 13.5px; color: var(--soft); }
   footer .legal { display: block; margin-top: 10px; font-size: 13px; max-width: 52em; }
   footer .legal a { color: var(--yellow); }
@@ -341,8 +344,8 @@ npm run release   # release/: 4 HTML + permisos</pre></li>
       <h2><span data-es>Atención al cliente</span><span data-en>Customer support</span></h2>
       <p class="sub" data-es>¿Ivy no se instala, algo falla o quieres Ivy para tu empresa? Escríbenos y te contestamos al correo que pongas.</p>
       <p class="sub" data-en>Ivy won't install, something breaks or you want Ivy for your company? Write to us and we'll answer at the email you give.</p>
-      <p class="privacy" data-es>Al tocar Enviar se abre tu correo con el mensaje ya escrito para <a href="mailto:motokoviloria@gmail.com">motokoviloria@gmail.com</a>: lo envías tú. Esta web no guarda nada; tu mensaje solo lo lee el equipo de Ivy y se usa para contestarte. Para que lo borremos, pídelo por correo.</p>
-      <p class="privacy" data-en>Tapping Send opens your email app with the message ready for <a href="mailto:motokoviloria@gmail.com">motokoviloria@gmail.com</a>: you send it. This site stores nothing; only the Ivy team reads your message, to answer you. To have it deleted, ask by email.</p>
+      <p class="privacy" data-es>Tu mensaje llega al equipo de Ivy y se guarda en su Google Drive solo para contestarte: nombre, correo, motivo y mensaje, nada más. Para que lo borremos, pídelo aquí o en <a href="mailto:motokoviloria@gmail.com">motokoviloria@gmail.com</a>.</p>
+      <p class="privacy" data-en>Your message reaches the Ivy team and is kept in their Google Drive only to answer you: name, email, topic and message, nothing else. To have it deleted, ask here or at <a href="mailto:motokoviloria@gmail.com">motokoviloria@gmail.com</a>.</p>
     </div>
     <form class="ask" name="contacto" id="contacto-form">
       <div class="row2">
@@ -360,19 +363,47 @@ npm run release   # release/: 4 HTML + permisos</pre></li>
         </select>
       </label>
       <label><span data-es>Mensaje</span><span data-en>Message</span><textarea name="mensaje" required maxlength="4000"></textarea></label>
+      <label class="hidden-field" aria-hidden="true">Web<input name="web" tabindex="-1" autocomplete="off"></label>
       <label class="consent"><input type="checkbox" name="acepto" value="si" required><span><span data-es>Acepto que uséis estos datos para contestarme.</span><span data-en>I agree you use this information to answer me.</span></span></label>
-      <button class="btn main" type="submit"><span data-es>Enviar</span><span data-en>Send</span></button>
+      <button class="btn main" type="submit" id="contacto-send"><span data-es>Enviar</span><span data-en>Send</span></button>
+      <div class="ask-fail" id="contacto-fail" hidden>
+        <p data-es><b>No se ha podido enviar.</b> Tu mensaje sigue aquí: prueba otra vez en un momento o mándalo por correo.</p>
+        <p data-en><b>It couldn't be sent.</b> Your message is still here: try again in a moment or send it by email.</p>
+        <a class="btn" id="contacto-mail" href="mailto:motokoviloria@gmail.com"><span data-es>Mandarlo por correo</span><span data-en>Send it by email</span></a>
+      </div>
     </form>
     <script>
-      // No server behind this site: Send opens the visitor's email app with the message written, to the Ivy team
-      document.getElementById('contacto-form').addEventListener('submit', (e) => {
+      // 📮 No server behind this site: the message goes to a Google Apps Script of the Ivy team (deploy/atc-apps-script.gs)
+      // that keeps it in their Drive, in Ivy/Atención al cliente; Ivy shows it in "📮 Atención al cliente" with a reply.
+      // "Sent" only when the script says it was saved; otherwise the message stays and there's an email way out.
+      const ATC_ENDPOINT = ''
+      const form = document.getElementById('contacto-form')
+      const fail = document.getElementById('contacto-fail')
+      const sendBtn = document.getElementById('contacto-send')
+      form.addEventListener('submit', async (e) => {
         e.preventDefault()
         const f = e.target
         const en = document.documentElement.lang === 'en'
         const motivo = f.motivo.options[f.motivo.selectedIndex].textContent
         const body = `${f.mensaje.value}\n\n— ${f.nombre.value} <${f.correo.value}>`
-        location.href = `mailto:motokoviloria@gmail.com?subject=${encodeURIComponent(`Ivy · ${motivo}`)}&body=${encodeURIComponent(body)}`
-        setTimeout(() => { location.href = 'gracias/' + (en ? '?en' : '') }, 800)
+        document.getElementById('contacto-mail').href = `mailto:motokoviloria@gmail.com?subject=${encodeURIComponent(`Ivy · ${motivo}`)}&body=${encodeURIComponent(body.slice(0, 1500))}`
+        fail.hidden = true
+        sendBtn.disabled = true
+        let ok = false
+        try {
+          if (ATC_ENDPOINT) {
+            // text/plain keeps it a simple request (no CORS preflight, which Apps Script doesn't answer)
+            const r = await fetch(ATC_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({
+              nombre: f.nombre.value, correo: f.correo.value, motivo: f.motivo.value, mensaje: f.mensaje.value, idioma: en ? 'en' : 'es', acepto: f.acepto.checked, web: f.web.value,
+            }) })
+            ok = (await r.json()).ok === true
+          }
+        } catch {
+          ok = false
+        }
+        sendBtn.disabled = false
+        if (ok) location.href = 'gracias/' + (en ? '?en' : '')
+        else fail.hidden = false
       })
     </script>
   </div>
@@ -389,8 +420,6 @@ npm run release   # release/: 4 HTML + permisos</pre></li>
     document.documentElement.lang = l
     document.querySelectorAll('.lang button').forEach((b) => b.classList.toggle('on', b.dataset.lang === l))
     try { localStorage.setItem('ivy-site-lang', l) } catch {}
-    const field = document.querySelector('form.ask input[name="idioma"]')
-    if (field) field.value = l
     // The options change their text (Safari ignores display: none on <option>)
     document.querySelectorAll('form.ask option[data-t-es]').forEach((o) => { o.textContent = o.dataset[l === 'en' ? 'tEn' : 'tEs'] })
   }
