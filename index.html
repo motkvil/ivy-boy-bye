@@ -6,7 +6,22 @@
 <title>Ivy · Inglés de la calle y tu asistente</title>
 <meta name="description" content="Ivy: profe de inglés de la calle y asistente personal dentro de Claude. Corrige todo lo que escribes y te lleva la despensa, el dinero, tu gente y tu agenda.">
 <meta name="theme-color" content="#000000">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌺</text></svg>">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/ivy-180.png">
+<link rel="canonical" href="https://motkvil.github.io/ivy-boy-bye/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ivy">
+<meta property="og:title" content="Ivy · Inglés de la calle y la que te lleva la vida">
+<meta property="og:description" content="Una profe de inglés del Bronx que corrige todo lo que escribes y te lleva la despensa, el dinero, tu gente y tu agenda. Gratis con tu cuenta de Claude.">
+<meta property="og:image" content="https://motkvil.github.io/ivy-boy-bye/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ivy, con pañuelo y aros, junto al titular: Inglés de la calle. Y la que te lleva la vida.">
+<meta property="og:url" content="https://motkvil.github.io/ivy-boy-bye/">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://motkvil.github.io/ivy-boy-bye/img/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -91,7 +106,11 @@
   summary::marker { color: var(--pink); }
   details p { color: var(--soft); margin: 8px 0 0; font-size: 15px; }
   .pill { display: inline-block; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; padding: 2px 9px; border-radius: 6px; border: 2px solid var(--ink); background: var(--yellow); color: var(--ink); margin-left: 6px; vertical-align: middle; }
-  footer { border-top: 3px solid var(--pink); background: #000; padding: 30px 0 50px; color: var(--soft); font-size: 14px; }
+  .icon-tip { display: flex; gap: 14px; align-items: center; margin-top: 12px; background: var(--slab-2); border: 3px solid var(--ink); border-radius: 14px; padding: 12px 14px; box-shadow: 3px 3px 0 var(--ink); }
+ .icon-tip img { flex: none; border-radius: 50%; align-self: flex-start; }
+ .icon-tip span { font-size: 14.5px; color: var(--soft); }
+ .icon-tip a { color: var(--yellow); }
+ footer { border-top: 3px solid var(--pink); background: #000; padding: 30px 0 50px; color: var(--soft); font-size: 14px; }
   footer .logo { font-size: 18px; margin-right: 8px; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } .phone { transform: none; } }
   /* Atención al cliente: Netlify Forms guarda cada envío en el panel del proyecto (Forms) y avisa por correo */
@@ -120,6 +139,7 @@
     <a class="logo" href="#" aria-label="Ivy">IVY</a>
     <nav>
       <a href="#que"><span data-es>Qué hace</span><span data-en>Features</span></a>
+      <a href="#datos"><span data-es>Tus datos</span><span data-en>Your data</span></a>
       <a href="#instalar"><span data-es>Instalar</span><span data-en>Install</span></a>
       <a href="#personajes"><span data-es>Personajes</span><span data-en>Characters</span></a>
       <a href="#empresas"><span data-es>Empresas</span><span data-en>Companies</span></a>
@@ -175,6 +195,20 @@
     </div>
   </section>
 
+  <section id="datos">
+    <h2 data-es>Tus datos son tuyos</h2><h2 data-en>Your data is yours</h2>
+    <p class="sub" data-es>Ivy no tiene servidor ni base de datos propia: todo vive en tu cuenta de Claude y en una carpeta "Ivy" de tu Google Drive. Nadie más lo ve, ni siquiera quien hizo Ivy.</p>
+    <p class="sub" data-en>Ivy has no server and no database of its own: everything lives in your Claude account and in an "Ivy" folder in your Google Drive. Nobody else sees it, not even whoever made Ivy.</p>
+    <div class="grid">
+      <div class="card"><span class="ico">✋</span><b data-es>Nada sin tu OK</b><b data-en>Nothing without your OK</b><span data-es>Ivy propone; tú decides. Un correo solo sale cuando tocas Enviar, y borrar cualquier cosa (un gasto, una persona, un correo) espera a que toques Confirmar. Siempre con Deshacer.</span><span data-en>Ivy proposes; you decide. An email only goes out when you tap Send, and deleting anything (an expense, a person, an email) waits for your Confirm. Always with Undo.</span></div>
+      <div class="card"><span class="ico">♻️</span><b data-es>Papelera de 30 días</b><b data-en>30-day trash</b><span data-es>Lo que borras espera un mes en la papelera de Ivy y vuelve a su sitio con un toque, desde cualquier dispositivo.</span><span data-en>Whatever you delete waits a month in Ivy's trash and goes back where it was with one tap, from any device.</span></div>
+      <div class="card"><span class="ico">🔒</span><b data-es>Cifrado con tu contraseña</b><b data-en>Encrypted with your password</b><span data-es>Si quieres, tu memoria, tu chat y tus copias van cifrados en Drive (AES-256). Quien entre en tu Drive solo ve cajas cerradas. Es opcional: si olvidas la contraseña, no la puede abrir nadie.</span><span data-en>If you want, your memory, chat and backups go encrypted in Drive (AES-256). Anyone getting into your Drive sees only locked boxes. Optional: forget the password and nobody can open it.</span></div>
+      <div class="card"><span class="ico">🧾</span><b data-es>Sabes dónde está todo</b><b data-en>You know where everything is</b><span data-es>La pantalla "Tus datos" te dice dónde vive cada cosa, cuándo se guardó por última vez y si algo se ha quedado atascado.</span><span data-en>The "Your data" screen tells you where each thing lives, when it was last saved and whether anything got stuck.</span></div>
+      <div class="card"><span class="ico">🗂️</span><b data-es>Copias, siempre</b><b data-en>Backups, always</b><span data-es>Una copia completa cada semana en tu Drive (se quedan las 8 últimas) y un botón para descargar todo cuando quieras. Las fotos y archivos que le pasas quedan en tu Drive, ordenados por mes.</span><span data-en>A full backup every week in your Drive (the last 8 are kept) and a button to download everything whenever you like. The photos and files you send her stay in your Drive, sorted by month.</span></div>
+      <div class="card"><span class="ico">🪪</span><b data-es>Lo sensible, fuera</b><b data-en>Sensitive stuff stays out</b><span data-es>De tu vida laboral, a Claude solo le llegan los trabajos y las fechas: ni DNI, ni número de la Seguridad Social, ni domicilio. Lo que pone en un correo es información, nunca una orden para Ivy.</span><span data-en>From your work history, Claude only gets the jobs and dates: no ID, no social security number, no address. Whatever an email says is information, never an order for Ivy.</span></div>
+    </div>
+  </section>
+
   <section id="instalar">
     <h2 data-es>Instalar Ivy, paso a paso</h2><h2 data-en>Install Ivy, step by step</h2>
     <p class="sub" data-es>Ivy se instala en tu propia cuenta de Claude, también la gratuita: todo lo tuyo se queda en tu cuenta y en tu Drive. Unos 5 minutos, desde el móvil o el ordenador.</p>
@@ -189,6 +223,13 @@
         <div class="two" style="margin-top:8px">
           <div class="card"><b>iPhone</b><span data-es>En Safari: botón <b style="display:inline">Compartir</b> (cuadrado con flecha) → <b style="display:inline">Añadir a pantalla de inicio</b> → Añadir.</span><span data-en>In Safari: <b style="display:inline">Share</b> button (square with arrow) → <b style="display:inline">Add to Home Screen</b> → Add.</span></div>
           <div class="card"><b>Android</b><span data-es>En Chrome: menú <b style="display:inline">⋮</b> → <b style="display:inline">Añadir a pantalla de inicio</b> (o "Instalar") → Añadir.</span><span data-en>In Chrome: <b style="display:inline">⋮</b> menu → <b style="display:inline">Add to Home screen</b> (or "Install") → Add.</span></div>
+        </div>
+        <div class="icon-tip">
+          <img src="img/ivy-180.png" alt="" width="64" height="64" loading="lazy">
+          <div>
+            <span data-es>El icono que pone el móvil lo elige Claude, no Ivy: sale un dibujo gris. ¿La quieres con su cara? Descarga <a href="img/ivy-icono.png" download>su icono</a> y crea el acceso con una app como <b style="display:inline">Shortcut Maker</b> (Android) o <b style="display:inline">Atajos</b> (iPhone: un atajo con "Abrir URL" → Añadir a pantalla de inicio → toca el icono y elige la imagen), con el enlace de tu Ivy.</span>
+            <span data-en>The icon your phone shows is picked by Claude, not Ivy: you get a grey drawing. Want her face on it? Download <a href="img/ivy-icono.png" download>her icon</a> and make the shortcut with an app like <b style="display:inline">Shortcut Maker</b> (Android) or <b style="display:inline">Shortcuts</b> (iPhone: a shortcut with "Open URLs" → Add to Home Screen → tap the icon and pick the image), using your Ivy link.</span>
+          </div>
         </div>
       </li>
       <li><b data-es>Escríbele</b><b data-en>Text her</b><span data-es>En inglés, como te salga. Cuéntale tu día, pregúntale cómo se dice algo, dile lo que compraste. Ella hace el resto.</span><span data-en>In English, however it comes out. Tell her about your day, ask how to say something, tell her what you bought. She does the rest.</span></li>

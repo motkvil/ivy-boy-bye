@@ -1,0 +1,4 @@
+# The Ivy website (static): nothing to build, the folder is the site
+[build]
+  publish = "."
+  command = "echo static site"
