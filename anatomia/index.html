@@ -300,7 +300,7 @@
     </div>
     <ol class="trip">
       <li class="you"><b>Escribes o adjuntas</b><p>En inglés como te salga, o en español para preguntar. Con el 📎 van fotos, PDF, Word o texto: las fotos como imagen y el resto como texto, solo con ese mensaje. Si es una pregunta tipo "¿cómo se dice…?", va a tu glosario.</p><span class="file">Ivy.jsx · attach.js</span></li>
-      <li><b>Ivy se prepara</b><p>Arma el contexto del turno: hora, lo que sabe de ti, tu gente, tu agenda, tu casa y tu dinero, tu perfil profesional, sus muletillas a evitar y <code>12</code> frases de Ella Ivy al azar.</p><span class="file">persona.js · settingsNote()</span></li>
+      <li><b>Ivy se prepara</b><p>Arma el contexto del turno: hora, lo que sabe de ti, tu gente, tu agenda, tu casa y tu dinero, tu perfil profesional, sus muletillas a evitar y <code>12</code> frases típicas suyas al azar.</p><span class="file">persona.js · settingsNote()</span></li>
       <li><b>Le pregunta a Claude</b><p>Su personalidad entera más ese contexto van a Claude con tu plan. La respuesta llega palabra a palabra.</p><span class="file">ask.js · askIvy()</span></li>
       <li><b>Mueve las manos si hace falta</b><p>Mientras contesta puede apuntar un gasto, sacar algo de la despensa, crear un evento, guardarte una oferta o escribirte un CV. Claude acepta un número limitado de herramientas por mensaje, así que entran primero las del tema del que hablas. Cada acción sale con botón de deshacer.</p><span class="file">actions.js · ask.js · usableTools</span></li>
       <li class="her"><b>Contesta y corrige</b><p>Primero su respuesta (si Claude falla o llega al límite, lo dice ella, con Reintentar cuando sirve); después de la marca <code>@@CORRECTIONS@@</code>, un paquete con tus fallos, cómo lo diría un nativo, dónde suena bien, palabras nuevas y datos tuyos que aprendió.</p><span class="file">ask.js</span></li>
@@ -423,8 +423,8 @@
       </div>
     </div>
     <div class="dodont">
-      <div class="do"><span class="label">Ivy es</span><p>Una profe con personalidad y una asistente que hace cosas. Inspirada en la streamer Ella Ivy, pero es Ivy del Bronx y L'Hospitalet, su fan número uno.</p></div>
-      <div class="dont"><span class="label">Ivy no es</span><p>Ella Ivy. Ni una madre, ni un curso con lecciones, ni un chatbot neutro. Nunca suaviza su carácter para quedar bien.</p></div>
+      <div class="do"><span class="label">Ivy es</span><p>Una profe con personalidad y una asistente que hace cosas. Ivy, del Bronx y L'Hospitalet.</p></div>
+      <div class="dont"><span class="label">Ivy no es</span><p>Ni una madre, ni un curso con lecciones, ni un chatbot neutro. Nunca suaviza su carácter para quedar bien.</p></div>
     </div>
     <div class="family">
       <span class="label">Arquitectura de marca</span>
@@ -592,13 +592,13 @@
   const CHAPTER = { 'm-marca': 'Marca', 'm-voz': 'Voz y tono', 'm-datos': 'Datos y privacidad', 'm-formas': 'Formas', 'm-color': 'Color' }
   const ORGANS = [
     { id: 'cerebro', man: 'm-marca', icon: '🧠', name: 'Cerebro', sub: 'personalidad', title: 'Quién es y cómo piensa',
-      say: 'Mujer del Bronx, vecina de L\'Hospitalet, fan de Ella Ivy. Barrio puro.',
+      say: 'Mujer del Bronx, vecina de L\'Hospitalet. Barrio puro.',
       does: ['Su prompt: carácter, reglas, cómo corregir y el formato de cada respuesta', 'Reglas tuyas: no da órdenes, mejor un insulto que un chiste malo, cada frase con sentido literal', 'Los personajes nuevos reutilizan su "motor" pero no su vida ni sus bromas'],
       files: ['persona.js · SYSTEM_PROMPT', 'characters.js', 'logic.test.js · huella'], nums: [['1', 'prompt blindado'], ['37 KB', 'de instrucciones']] },
     { id: 'corazon', man: 'm-voz', icon: '🫀', name: 'Corazón', sub: 'carácter', title: 'Lo que la hace sonar viva',
       say: 'No repite fórmulas: cada mensaje recibe frases distintas.',
-      does: ['12 frases de Ella Ivy al azar por mensaje, de unas 420', 'Su propia vida: cosas que le pasan y que recuerda', 'Bromas recurrentes contigo y reacciones a tus mensajes', 'Detector de muletillas que le avisa cuando se repite'],
-      files: ['ellaLines.js', 'gags.js', 'timeline.js · replyTics'], nums: [['~420', 'frases de Ella'], ['15', 'cosas de su vida'], ['2', 'bromas recurrentes']] },
+      does: ['12 frases típicas suyas al azar por mensaje, de unas 420', 'Su propia vida: cosas que le pasan y que recuerda', 'Bromas recurrentes contigo y reacciones a tus mensajes', 'Detector de muletillas que le avisa cuando se repite'],
+      files: ['lista de frases', 'gags.js', 'timeline.js · replyTics'], nums: [['~420', 'frases suyas'], ['15', 'cosas de su vida'], ['2', 'bromas recurrentes']] },
     { id: 'boca', man: 'm-voz', icon: '👄', name: 'Boca', sub: 'habla', title: 'Cómo habla contigo',
       say: 'Habla con Claude usando tu plan, palabra a palabra, y cuando algo falla lo dice ella.',
       does: ['Chat en streaming con Claude (capacidad sample)', 'Voz del navegador: te lee sus respuestas', 'Modo pantalla como cartelera del manual: diseña las palabras (cartel, contorno, brillo, neón, sello, rotulador) y la bola 8 al agitar', 'Saludo y gritos a pantalla entera', 'Límite del plan y fallos de Claude dichos con su voz, con Reintentar'],
