@@ -179,10 +179,12 @@
   footer .legal a { color: var(--yellow); }
   html:not([lang="en"]) [data-en], html[lang="en"] [data-es] { display: none !important; }
 
- /* Proposals: the bar to jump between them, and the pieces only they have */
- .switcher { display: flex; justify-content: center; gap: 6px; padding: 6px 10px; background: var(--yellow); border-bottom: 2px solid var(--ink); font: 700 12px var(--mono); letter-spacing: .06em; }
+ /* Proposals: the bar to jump between them */
+ .switcher { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding: 6px 10px; background: var(--yellow); border-bottom: 2px solid var(--ink); font: 700 12px var(--mono); letter-spacing: .06em; }
  .switcher a { color: var(--ink); text-decoration: none; padding: 3px 12px; border-radius: 999px; border: 2px solid transparent; }
  .switcher a.on { background: var(--ink); color: var(--yellow); }
+
+ /* The pieces only the new pages have */
  .story { max-width: 44em; }
  .story p { font-size: 18px; color: var(--paper); margin: 0 0 16px; }
  .story p.kick { font-size: 20px; color: var(--pink); font-weight: 700; }
@@ -201,7 +203,7 @@
 </style>
 </head>
 <body>
-<nav class="switcher" aria-label="Propuestas"><a href="propuesta-a.html">A</a><a href="propuesta-b.html">B</a><a href="propuesta-c.html" class=on aria-current=page>C</a><a href="./">Actual</a></nav>
+<nav class="switcher" aria-label="Propuestas"><a href="propuesta-a.html">A</a><a href="propuesta-b.html">B</a><a href="propuesta-c.html" class=on aria-current=page>C</a><a href="propuesta-antigua.html">Antigua</a><a href="./">Portada</a></nav>
 <header class="top">
   <div class="wrap">
     <a class="logo" href="#" aria-label="Ivy">IVY</a>

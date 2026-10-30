@@ -179,10 +179,12 @@
   footer .legal a { color: var(--yellow); }
   html:not([lang="en"]) [data-en], html[lang="en"] [data-es] { display: none !important; }
 
- /* Proposals: the bar to jump between them, and the pieces only they have */
- .switcher { display: flex; justify-content: center; gap: 6px; padding: 6px 10px; background: var(--yellow); border-bottom: 2px solid var(--ink); font: 700 12px var(--mono); letter-spacing: .06em; }
+ /* Proposals: the bar to jump between them */
+ .switcher { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding: 6px 10px; background: var(--yellow); border-bottom: 2px solid var(--ink); font: 700 12px var(--mono); letter-spacing: .06em; }
  .switcher a { color: var(--ink); text-decoration: none; padding: 3px 12px; border-radius: 999px; border: 2px solid transparent; }
  .switcher a.on { background: var(--ink); color: var(--yellow); }
+
+ /* The pieces only the new pages have */
  .story { max-width: 44em; }
  .story p { font-size: 18px; color: var(--paper); margin: 0 0 16px; }
  .story p.kick { font-size: 20px; color: var(--pink); font-weight: 700; }
@@ -201,12 +203,12 @@
 </style>
 </head>
 <body>
-<nav class="switcher" aria-label="Propuestas"><a href="propuesta-a.html">A</a><a href="propuesta-b.html" class=on aria-current=page>B</a><a href="propuesta-c.html">C</a><a href="./">Actual</a></nav>
+<nav class="switcher" aria-label="Propuestas"><a href="propuesta-a.html">A</a><a href="propuesta-b.html" class=on aria-current=page>B</a><a href="propuesta-c.html">C</a><a href="propuesta-antigua.html">Antigua</a><a href="./">Portada</a></nav>
 <header class="top">
   <div class="wrap">
     <a class="logo" href="#" aria-label="Ivy">IVY</a>
     <nav>
-      <a href="#demo"><span data-es>Pruébala</span><span data-en>Try it</span></a>
+      <a href="#demo"><span data-es>Demo</span><span data-en>Demo</span></a>
       <a href="#por-que"><span data-es>Por qué</span><span data-en>Why</span></a>
       <a href="#que"><span data-es>Qué hace</span><span data-en>Features</span></a>
       <a href="#datos"><span data-es>Privacidad</span><span data-en>Privacy</span></a>
@@ -214,6 +216,8 @@
       <a href="#empresas"><span data-es>Equipos</span><span data-en>Teams</span></a>
       <a href="#faq"><span data-es>FAQ</span><span data-en>FAQ</span></a>
       <a href="#contacto"><span data-es>Contacto</span><span data-en>Contact</span></a>
+      <a href="anatomia/"><span data-es>Anatomía</span><span data-en>Anatomy</span></a>
+      <a href="mapa/"><span data-es>Mapa de datos</span><span data-en>Data map</span></a>
     </nav>
     <div class="lang" role="group" aria-label="Idioma / Language">
       <button data-lang="es" class="on">ES</button><button data-lang="en">EN</button>
