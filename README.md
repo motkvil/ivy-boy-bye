@@ -1,6 +1,6 @@
 # Ivy · boy, bye
 
-La web de **Ivy**, la profe de inglés de la calle que vive en tu Claude: https://motkvil.github.io/ivy-boy-bye/
+La web de **Ivy**, un bug que enseña inglés y vive en tu móvil. Yo vivo, tú hablas: https://motkvil.github.io/ivy-boy-bye/
 
 Aquí solo está la web (estática). Para instalar Ivy, descarga `descargas/ivy-boy-bye.zip` desde la web y sigue `INSTALAR.md`.
 
