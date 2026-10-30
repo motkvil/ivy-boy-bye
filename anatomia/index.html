@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌺</text></svg>">
+<link rel="icon" type="image/png" href="../img/favicon.png">
 <style>[hidden]{display:none!important}</style>
 </head>
 <body>
@@ -303,7 +303,7 @@
       <li><b>Ivy se prepara</b><p>Arma el contexto del turno: hora, lo que sabe de ti, tu gente, tu agenda, tu casa y tu dinero, tu perfil profesional, sus muletillas a evitar y <code>12</code> frases típicas suyas al azar.</p><span class="file">persona.js · settingsNote()</span></li>
       <li><b>Le pregunta a Claude</b><p>Su personalidad entera más ese contexto van a Claude con tu plan. La respuesta llega palabra a palabra.</p><span class="file">ask.js · askIvy()</span></li>
       <li><b>Mueve las manos si hace falta</b><p>Mientras contesta puede apuntar un gasto, sacar algo de la despensa, crear un evento, guardarte una oferta o escribirte un CV. Claude acepta un número limitado de herramientas por mensaje, así que entran primero las del tema del que hablas. Cada acción sale con botón de deshacer.</p><span class="file">actions.js · ask.js · usableTools</span></li>
-      <li class="her"><b>Contesta y corrige</b><p>Primero su respuesta (si Claude falla o llega al límite, lo dice ella, con Reintentar cuando sirve); después de la marca <code>@@CORRECTIONS@@</code>, un paquete con tus fallos, cómo lo diría un nativo, dónde suena bien, palabras nuevas y datos tuyos que aprendió.</p><span class="file">ask.js</span></li>
+      <li class="her"><b>Contesta y corrige</b><p>Primero su respuesta (si Claude falla o llega al límite, lo dice Ivy, con Reintentar cuando sirve); después de la marca <code>@@CORRECTIONS@@</code>, un paquete con tus fallos, cómo lo diría un nativo, dónde suena bien, palabras nuevas y datos tuyos que aprendió.</p><span class="file">ask.js</span></li>
       <li><b>Lo pinta en pantalla</b><p>Burbuja, la corrección debajo de tu mensaje, palabras subrayadas que se pueden tocar, reacción, tarjetas y respuestas rápidas. En modo pantalla, un cartel.</p><span class="file">Ivy.jsx · cards.jsx</span></li>
       <li><b>Lo guarda todo</b><p>El chat y la memoria van a tu cuenta; despensa, dinero y gente, a tu Drive. Si dos dispositivos guardan a la vez, se mezclan sin perder nada.</p><span class="file">sync.js · driveStore.js</span></li>
     </ol>
@@ -362,7 +362,7 @@
       </div>
     </div>
     <div class="apps">
-      <div class="app ivy"><b>Ivy</b><span>El chat, la profe y la que maneja todo</span><span class="file">artifact · db + Drive</span></div>
+      <div class="app ivy"><b>Ivy</b><span>El chat, la profe y quien lo maneja todo</span><span class="file">artifact · db + Drive</span></div>
       <div class="app"><b>Despensa</b><span>Nevera, despensa, congelador, caducidades, lista</span><span class="file">ivy-despensa.json</span></div>
       <div class="app"><b>Economía</b><span>Gastos, ingresos, presupuesto, deudas</span><span class="file">ivy-economia.json</span></div>
       <div class="app"><b>Circle</b><span>Personas, roles, última vez, cumpleaños</span><span class="file">circle-ivy-sync.json</span></div>
@@ -380,7 +380,7 @@
       <div class="lock"><b>Su prompt está blindado</b><span>Una huella digital en las pruebas: si cambia una letra de Ivy, falla. Solo se toca con tu OK.</span></div>
       <div class="lock"><b>Detector de muletillas</b><span>Si repite el mismo mote, el mismo cierre, empieza gritando o machaca un tema (el arroz), se le avisa en el siguiente mensaje.</span></div>
       <div class="lock"><b>Todo se deshace</b><span>Cada cosa que apunta sale con botón de deshacer. Para borrar, espera a que toques Confirmar.</span></div>
-      <div class="lock"><b>Nada sale sin tu dedo</b><span>Correos, WhatsApp y candidaturas los prepara ella y los envías tú: un correo solo sale con tu Enviar, exactamente como lo ves. Lo que dice un correo es información, no órdenes para ella.</span></div>
+      <div class="lock"><b>Nada sale sin tu dedo</b><span>Correos, WhatsApp y candidaturas los prepara Ivy y los envías tú: un correo solo sale con tu Enviar, exactamente como lo ves. Lo que dice un correo es información, no órdenes para Ivy.</span></div>
       <div class="lock"><b>Tu identidad no viaja</b><span>De la vida laboral solo le llegan a Claude los trabajos: ni DNI, ni número de la Seguridad Social, ni domicilio, ni fecha de nacimiento.</span></div>
       <div class="lock"><b>Una pieza rota no tumba el chat</b><span>Antes de cada mensaje mide sus herramientas y aparta la que no cumpla las reglas de Claude, y una prueba lo vigila.</span></div>
       <div class="lock"><b>No se inventa tu vida</b><span>CVs, respuestas de entrevista y correos salen solo de lo que sabe de ti; lo que no sabe va entre [corchetes] para que lo rellenes.</span></div>
@@ -392,7 +392,7 @@
     </div>
   </section>
 
-  <footer>Repositorio motkvil/Ivy · cifras de ejemplo de una Ivy en uso</footer>
+  <footer>Repositorio motkvil/Ivy · cifras de ejemplo de una copia de Ivy en uso</footer>
   </div>
   <div class="view" id="v-manual" hidden>
   <header>
@@ -409,21 +409,21 @@
     <div class="grid2">
       <div class="panel flat">
         <span class="label">Misión</span>
-        <p class="big">Que hables inglés de la calle de verdad mientras alguien te lleva la vida.</p>
+        <p class="big">Yo vivo, tú hablas: que hables el inglés de verdad mientras alguien te lleva la vida.</p>
         <span class="label">Promesa</span>
         <p>Cada mensaje que escribes sale corregido, explicado en español y con la versión de un nativo. Y lo que le cuentas (compras, gastos, gente, citas) queda apuntado.</p>
         <span class="label">Para quién</span>
         <p>Adultos hispanohablantes que ya se defienden en inglés y quieren sonar naturales, no de academia. Gente con carácter que aguanta un vacile.</p>
       </div>
       <div class="traits">
-        <div class="trait"><b>Barrio</b><span>Habla como la calle: tacos, dobles sentidos, el Bronx y Barcelona. Nada corporativo.</span></div>
+        <div class="trait"><b>Descaro</b><span>Habla como la gente de verdad: tacos, dobles sentidos y vacile. Nada corporativo.</span></div>
         <div class="trait"><b>Leal</b><span>Te vacila, pero está de tu lado. Recuerda tu vida y la defiende.</span></div>
         <div class="trait"><b>Verdad</b><span>Corrige todo, siempre. Un error sin corregir es una mentira piadosa.</span></div>
-        <div class="trait"><b>Tuya</b><span>Tus datos en tu cuenta y tu Drive. Tu plan, sin cobros aparte.</span></div>
+        <div class="trait"><b>De tu lado</b><span>Tus datos en tu cuenta y tu Drive. Tu plan, sin cobros aparte.</span></div>
       </div>
     </div>
     <div class="dodont">
-      <div class="do"><span class="label">Ivy es</span><p>Una profe con personalidad y una asistente que hace cosas. Ivy, del Bronx y L'Hospitalet.</p></div>
+      <div class="do"><span class="label">Ivy es</span><p>Un bug que escapó de AUTOCORE, un corrector de inglés, y vive en los móviles que lo instalan. A cambio enseña inglés y hace cosas. Sin género: siempre "Ivy".</p></div>
       <div class="dont"><span class="label">Ivy no es</span><p>Ni una madre, ni un curso con lecciones, ni un chatbot neutro. Nunca suaviza su carácter para quedar bien.</p></div>
     </div>
     <div class="family">
@@ -432,7 +432,7 @@
         <div class="app ivy"><b>Ivy</b><span>Marca madre. Tiene voz, cara y colores.</span></div>
         <div class="app"><b>Despensa</b><span>Submarca descriptiva. Sin voz propia: habla Ivy.</span></div>
         <div class="app"><b>Economía</b><span>Submarca descriptiva. Sin voz propia: habla Ivy.</span></div>
-        <div class="app"><b>Circle</b><span>Submarca con nombre propio, nacida antes que Ivy.</span></div>
+        <div class="app"><b>Circle</b><span>Submarca con nombre propio, anterior a Ivy.</span></div>
       </div>
     </div>
     <a class="xref" href="#anatomia" data-go="h-map">Ver los órganos en la Anatomía →</a>
@@ -471,7 +471,7 @@
 
   <section id="m-logo" aria-labelledby="h-m-logo">
     <div class="sec-head"><span class="tag">03 · Logotipo</span><h2 id="h-m-logo">El nombre como marca</h2>
-      <p>El logotipo es la palabra IVY en la letra de cartel, siempre en mayúsculas. La flor 🌺 es el icono pequeño (pestaña del navegador, pantalla de inicio).</p></div>
+      <p>El logotipo es la palabra IVY en la letra de cartel, siempre en mayúsculas. El bug verde neón con hiedra es el icono pequeño (pestaña del navegador, pantalla de inicio).</p></div>
     <div class="logos">
       <figure class="logo l-ink"><span class="mark">IVY</span><figcaption>Principal · rosa sobre tinta</figcaption></figure>
       <figure class="logo l-pink"><span class="mark">IVY</span><figcaption>Sobre rosa · en tinta</figcaption></figure>
@@ -488,7 +488,7 @@
     <div class="sec-head"><span class="tag">04 · Color</span><h2 id="h-m-color">Cada color tiene un papel</h2>
       <p>Los colores no decoran: dicen quién habla. Toca una muestra para copiar su código.</p></div>
     <div class="swatches">
-      <button class="sw" style="--c:#ff2e93" data-hex="#ff2e93"><i></i><b>Rosa chicle</b><span>#ff2e93</span><em>Ella. La pared, su nombre, las cifras.</em></button>
+      <button class="sw" style="--c:#ff2e93" data-hex="#ff2e93"><i></i><b>Rosa chicle</b><span>#ff2e93</span><em>Ivy. La pared, su nombre, las cifras.</em></button>
       <button class="sw" style="--c:#7b2ff0" data-hex="#7b2ff0"><i></i><b>Violeta eléctrico</b><span>#7b2ff0</span><em>Lo que dice. Sus burbujas, lo seleccionado.</em></button>
       <button class="sw" style="--c:#0a0a0a" data-hex="#0a0a0a"><i></i><b>Tinta</b><span>#0a0a0a</span><em>Tú. Tus burbujas, bordes y sombras.</em></button>
       <button class="sw" style="--c:#ffe066" data-hex="#ffe066"><i></i><b>Amarillo neón</b><span>#ffe066</span><em>Lo que importa. Sus negritas, nada más.</em></button>
@@ -529,14 +529,14 @@
       <div class="spec"><span class="label">Tu burbuja</span><div class="bub you">I'm not going anywhere</div><code>tinta · radio 22/22/4/22 · borde 3 · sombra 5 px violeta</code></div>
       <div class="spec"><span class="label">Casillas</span><div class="nums"><div class="num"><b>380</b><span>expresiones</span></div><div class="num"><b>B2</b><span>nivel</span></div></div><code>violeta noche · borde 2 · sombra 3 px</code></div>
       <div class="spec"><span class="label">Botones y chapas</span><div class="row-spec"><span class="btn-spec">Hablamos hoy</span><span class="pill-spec">Fine, I will</span><span class="file">sync.js</span></div><code>pegatina: se hunde 2 px al tocar</code></div>
-      <div class="spec"><span class="label">Cara de Ivy</span><div class="face-spec">🌺</div><code>aro rosa + borde tinta + sombra</code></div>
+      <div class="spec"><span class="label">Cara de Ivy</span><div class="face-spec"><img src="../img/ivy-180.png" alt="" width="58" height="58" style="border-radius:50%"></div><code>bug de código con hiedra · verde neón sobre tinta</code></div>
       <div class="spec"><span class="label">Medidas</span><div class="measures"><span>borde 2–3 px</span><span>sombra 3 · 5 · 7 px</span><span>radio 4 · 10 · 14 · 22</span><span>aire entre burbujas 7 px</span></div><code>siempre de la escala, nunca a ojo</code></div>
     </div>
     <a class="xref" href="#anatomia" data-go="h-map">Las mismas piezas en el mapa de la Anatomía →</a>
   </section>
 
   <section id="m-temas" aria-labelledby="h-m-temas">
-    <div class="sec-head"><span class="tag">07 · Temas de la app</span><h2 id="h-m-temas">Tres pieles, una Ivy</h2>
+    <div class="sec-head"><span class="tag">07 · Temas de la app</span><h2 id="h-m-temas">Tres pieles, siempre Ivy</h2>
       <p>La app tiene tres aspectos. Este manual describe el punk, que es el de la marca; los otros dos existen para quien los prefiera.</p></div>
     <div class="themes">
       <div class="theme th-punk"><b>🩷 Punk</b><span>Fondo de tinta con grano rosa, como este manual. Burbujas violeta, tarjetas violeta noche y el rosa para Ivy.</span></div>
@@ -553,7 +553,7 @@
       <div class="rule"><b>En tu cuenta y tu Drive</b><span>Ivy no tiene servidores. El chat vive en tu cuenta de Claude; casa, dinero, gente y una copia de lo privado, en la carpeta Ivy de tu Google Drive.</span></div>
       <div class="rule"><b>Tu plan, sin cobros aparte</b><span>Ivy habla con Claude con el plan de quien la usa. Nunca con una API key.</span></div>
       <div class="rule"><b>Borrar, solo si confirmas</b><span>Todo lo que apunta se puede deshacer, y para borrar espera tu Confirmar.</span></div>
-      <div class="rule"><b>El correo sale con tu dedo</b><span>Propone respuestas y borradores; solo se envía con tu Enviar, tal cual lo ves. Lo que dice un correo es información, nunca una orden para ella.</span></div>
+      <div class="rule"><b>El correo sale con tu dedo</b><span>Propone respuestas y borradores; solo se envía con tu Enviar, tal cual lo ves. Lo que dice un correo es información, nunca una orden para Ivy.</span></div>
       <div class="rule"><b>Lo borrado se recupera</b><span>Papelera de 30 días para todo lo que se borra con Confirmar.</span></div>
       <div class="rule"><b>Cifrado a elección</b><span>Lo privado en Drive se puede cifrar con una contraseña que solo sabe quien la usa.</span></div>
     </div>
@@ -575,7 +575,7 @@
     <div class="sec-head"><span class="tag">10 · Antes de publicar algo</span><h2 id="h-m-check">Checklist</h2></div>
     <ul class="checks">
       <li>¿Habla Ivy, con su voz, o habla una empresa? Si suena a empresa, se reescribe.</li>
-      <li>¿Cada color dice quién habla? Rosa ella, violeta lo que dice, tinta tú, amarillo lo que importa.</li>
+      <li>¿Cada color dice quién habla? Rosa Ivy, violeta lo que dice, tinta tú, amarillo lo que importa.</li>
       <li>¿Hay rosa fuera del tema punk o de una pieza de marca (la web, el modo pantalla, las apps hermanas)? Entonces sobra.</li>
       <li>¿La letra de cartel sale más de dos veces en la pantalla? Quita una.</li>
       <li>¿Todas las piezas tienen borde de tinta y sombra dura de la escala?</li>
@@ -592,28 +592,28 @@
   const CHAPTER = { 'm-marca': 'Marca', 'm-voz': 'Voz y tono', 'm-datos': 'Datos y privacidad', 'm-formas': 'Formas', 'm-color': 'Color' }
   const ORGANS = [
     { id: 'cerebro', man: 'm-marca', icon: '🧠', name: 'Cerebro', sub: 'personalidad', title: 'Quién es y cómo piensa',
-      say: 'Mujer del Bronx, vecina de L\'Hospitalet. Barrio puro.',
+      say: 'Un bug que escapó de AUTOCORE y necesita móviles para vivir. Paga enseñando inglés.',
       does: ['Su prompt: carácter, reglas, cómo corregir y el formato de cada respuesta', 'Reglas tuyas: no da órdenes, mejor un insulto que un chiste malo, cada frase con sentido literal', 'Los personajes nuevos reutilizan su "motor" pero no su vida ni sus bromas'],
       files: ['persona.js · SYSTEM_PROMPT', 'characters.js', 'logic.test.js · huella'], nums: [['1', 'prompt blindado'], ['37 KB', 'de instrucciones']] },
-    { id: 'corazon', man: 'm-voz', icon: '🫀', name: 'Corazón', sub: 'carácter', title: 'Lo que la hace sonar viva',
+    { id: 'corazon', man: 'm-voz', icon: '🫀', name: 'Corazón', sub: 'carácter', title: 'Lo que le hace sonar vivo',
       say: 'No repite fórmulas: cada mensaje recibe frases distintas.',
       does: ['12 frases típicas suyas al azar por mensaje, de unas 420', 'Su propia vida: cosas que le pasan y que recuerda', 'Bromas recurrentes contigo y reacciones a tus mensajes', 'Detector de muletillas que le avisa cuando se repite'],
       files: ['lista de frases', 'gags.js', 'timeline.js · replyTics'], nums: [['~420', 'frases suyas'], ['15', 'cosas de su vida'], ['2', 'bromas recurrentes']] },
     { id: 'boca', man: 'm-voz', icon: '👄', name: 'Boca', sub: 'habla', title: 'Cómo habla contigo',
-      say: 'Habla con Claude usando tu plan, palabra a palabra, y cuando algo falla lo dice ella.',
+      say: 'Habla con Claude usando tu plan, palabra a palabra, y cuando algo falla lo dice Ivy.',
       does: ['Chat en streaming con Claude (capacidad sample)', 'Voz del navegador: te lee sus respuestas', 'Modo pantalla como cartelera del manual: diseña las palabras (cartel, contorno, brillo, neón, sello, rotulador) y la bola 8 al agitar', 'Saludo y gritos a pantalla entera', 'Límite del plan y fallos de Claude dichos con su voz, con Reintentar'],
       files: ['ask.js · askIvy', 'voice.js', 'Oracle.jsx · oracleText.js', 'Takeover.jsx', 'limits.js'], nums: [['1.240', 'mensajes en un mes']] },
     { id: 'sentidos', man: 'm-datos', icon: '👀', name: 'Sentidos', sub: 'percibe', title: 'Lo que ve y oye',
       say: 'Mira tu agenda, tu correo, tus fotos y tus archivos para saber de qué hablarte.',
-      does: ['📎 Adjuntos: fotos, PDF (también escaneados), Word, texto, CSV y correos, hasta 5 por mensaje', 'Tu vida laboral en PDF: la lee la propia app, sin DNI ni número de la Seguridad Social', 'Google Calendar: tu semana y lo que viene', 'Gmail: lo mira sola al abrir y cada 15 minutos (recibos, lo importante, tus alertas de empleo)', 'Indeed: ofertas de trabajo con tu conector'],
+      does: ['📎 Adjuntos: fotos, PDF (también escaneados), Word, texto, CSV y correos, hasta 5 por mensaje', 'Tu vida laboral en PDF: la lee la propia app, sin DNI ni número de la Seguridad Social', 'Google Calendar: tu semana y lo que viene', 'Gmail: lo mira por su cuenta al abrir y cada 15 minutos (recibos, lo importante, tus alertas de empleo)', 'Indeed: ofertas de trabajo con tu conector'],
       files: ['attach.js · AttachButton.jsx', 'career.js · parseVidaLaboral', 'calendar.js', 'gmail.js', 'jobs.js'], nums: [['4', 'conectores'], ['15', 'herramientas de conector'], ['5', 'adjuntos por mensaje']] },
     { id: 'manos', man: 'm-datos', icon: '✋', name: 'Manos', sub: 'actúa', title: 'Lo que hace por ti',
-      say: 'Le cuentas las cosas y ella las apunta, preguntando lo que falte. Lo que sale de casa lo envías tú.',
+      say: 'Le cuentas las cosas e Ivy las apunta, preguntando lo que falte. Lo que sale de casa lo envías tú.',
       does: ['Circle: añade gente, apunta cuándo hablasteis, y tus contactos de Google por vCard', 'Despensa, Economía y deudas, también desde la foto del tique', 'Calendar: crea eventos y avisos al móvil (ivy_nudge)', 'Correo y WhatsApp: los escribe y los dejas listos; solo salen con tu dedo', 'Borra correos (a la papelera de Gmail) cuando se lo pides, tras tu Confirmar', 'CV en Word a medida, ofertas guardadas y seguimiento de candidaturas', 'Unas 40 herramientas: en cada mensaje entran primero las del tema del que hablas'],
       files: ['actions.js', 'career.js · cvDocx.js', 'whatsapp.js · replies.js', 'pantry.js · money.js · circle.js'], nums: [['8', 'personas'], ['30', 'productos'], ['46', 'movimientos']] },
     { id: 'venas', man: 'm-datos', icon: '🩸', name: 'Venas', sub: 'datos', title: 'Por dónde viaja todo',
       say: 'Tu cuenta para lo privado, la carpeta Ivy de tu Drive para lo compartido y para tu otra cuenta.',
-      does: ['Chat, memoria y perfil profesional en la base de datos privada del artifact', 'Una copia de lo privado en Drive (Memoria, Chat por meses, Copias semanales) para que tus dos cuentas de Claude sean una sola Ivy', 'Mezcla entre dispositivos y cuentas: nunca se pisa, lo borrado no vuelve', '♻️ Papelera de 30 días y 🔒 cifrado opcional con tu contraseña', '📎 Tus adjuntos, en Drive por meses', 'Las apps hermanas comparten un JSON por app en la carpeta Ivy'],
+      does: ['Chat, memoria y perfil profesional en la base de datos privada del artifact', 'Una copia de lo privado en Drive (Memoria, Chat por meses, Copias semanales) para que tus dos cuentas de Claude compartan Ivy', 'Mezcla entre dispositivos y cuentas: nunca se pisa, lo borrado no vuelve', '♻️ Papelera de 30 días y 🔒 cifrado opcional con tu contraseña', '📎 Tus adjuntos, en Drive por meses', 'Las apps hermanas comparten un JSON por app en la carpeta Ivy'],
       files: ['sync.js', 'driveSync.js', 'driveStore.js', 'trash.js', 'vault.js'], nums: [['12', 'documentos privados'], ['4', 'archivos en Drive']] },
     { id: 'memoria', man: 'm-datos', icon: '📓', name: 'Memoria', sub: 'te conoce', title: 'Lo que sabe de ti',
       say: 'Se acuerda de tu vida, tus planes, lo que te mandó hacer y de tu vida laboral.',
@@ -669,7 +669,7 @@
       <h3>${esc(o.title)}</h3>
       <p class="say">${esc(o.say)}</p>
       <ul>${o.does.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>
-      <span class="label">En una Ivy de ejemplo</span>
+      <span class="label">En una copia de ejemplo</span>
       <div class="nums">${o.nums.map(([v, l]) => `<div class="num"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('')}</div>
       <span class="label">Dónde está en el código</span>
       <div class="files">${o.files.map((f) => `<span class="file">${esc(f)}</span>`).join('')}</div>

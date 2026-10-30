@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌺</text></svg>">
+<link rel="icon" type="image/png" href="../img/favicon.png">
 <style>[hidden]{display:none!important}</style>
 </head>
 <body>
@@ -200,7 +200,7 @@
     </div>
   </section>
 
-  <footer><span>Cifras de ejemplo de una Ivy en uso</span><a href="../anatomia/">Anatomía y Manual de Ivy ↗</a></footer>
+  <footer><span>Cifras de ejemplo de una copia de Ivy en uso</span><a href="../anatomia/">Anatomía y Manual de Ivy ↗</a></footer>
 </div>
 
 <script>
@@ -224,7 +224,7 @@
       say: 'Ivy mira tus próximos días para saber de qué hablarte.',
       list: ['Eventos de los próximos 7 días', 'Huecos libres y planes'], route: ['Google Calendar', 'calendar.js', 'contexto y tarjeta semana'], files: ['calendar.js'], nums: [['7', 'días que mira']] },
     { b: 'in', id: 'mail-in', icon: '✉️', name: 'Gmail', sub: 'lo vigila Ivy', title: 'Tus correos',
-      say: 'Mira tu correo al abrir, cada 15 minutos y al volver. Lo que dicen es información, nunca una orden para ella.',
+      say: 'Mira tu correo al abrir, cada 15 minutos y al volver. Lo que dicen es información, nunca una orden para Ivy.',
       list: ['Recibos (Uber, delivery, compras, suscripciones) → gasto en Economía, una sola vez', 'Lo nuevo que importa → tarjeta 📬 en el chat', 'Correos de personas → una respuesta propuesta en 📝 Por responder', 'Con Ivy cerrada mira la tarea programada (4 rondas al día)'], route: ['Gmail', 'mailWatch.js', 'Economía · 📬 · Por responder'], files: ['mailWatch.js', 'gmail.js', 'replies.js'], nums: [['15', 'minutos entre miradas']] },
     { b: 'in', id: 'drive-in', icon: '📁', name: 'Apps hermanas', sub: 'Drive', title: 'Lo que apuntas en las apps',
       say: 'Despensa, Economía y Circle escriben en tu Drive y Ivy lo lee.',
@@ -392,7 +392,7 @@
       <ul>${n.list.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>
       <span class="label">Recorrido</span>
       <div class="route">${n.route.map((r) => `<span>${esc(r)}</span>`).join('<b>→</b>')}</div>
-      <span class="label">En una Ivy de ejemplo</span>
+      <span class="label">En una copia de ejemplo</span>
       <div class="nums">${n.nums.map(([v, l]) => `<div class="num"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('')}</div>
       <span class="label">Dónde está en el código</span>
       <div class="files">${n.files.map((f) => `<span class="file">${esc(f)}</span>`).join('')}</div>`
