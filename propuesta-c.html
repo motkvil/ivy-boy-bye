@@ -91,6 +91,7 @@
   .tabs button.on { background: var(--pink); color: var(--ink); font-weight: 700; }
   ol.steps { list-style: none; counter-reset: s; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
   ol.steps > li { counter-increment: s; background: var(--slab); border: 3px solid var(--ink); border-radius: 14px; padding: 16px 18px 16px 66px; position: relative; box-shadow: 5px 5px 0 var(--ink); min-width: 0; }
+  .copy-msg { font: inherit; font-size: 13px; font-weight: 700; padding: 3px 10px; margin: 0 2px; border: 2px solid var(--ink); border-radius: 999px; background: var(--pink); color: var(--ink); cursor: pointer; box-shadow: 2px 2px 0 var(--ink); }
   ol.steps > li::before { content: counter(s); position: absolute; left: 16px; top: 14px; width: 34px; height: 34px; border-radius: 50%; background: var(--pink); color: var(--ink); border: 3px solid var(--ink); font-family: var(--display); font-size: 14px; display: grid; place-items: center; }
   ol.steps b { display: block; margin-bottom: 2px; }
   ol.steps span, ol.steps li > div { color: var(--soft); font-size: 15px; }

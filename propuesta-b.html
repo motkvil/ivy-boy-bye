@@ -91,6 +91,7 @@
   .tabs button.on { background: var(--pink); color: var(--ink); font-weight: 700; }
   ol.steps { list-style: none; counter-reset: s; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
   ol.steps > li { counter-increment: s; background: var(--slab); border: 3px solid var(--ink); border-radius: 14px; padding: 16px 18px 16px 66px; position: relative; box-shadow: 5px 5px 0 var(--ink); min-width: 0; }
+  .copy-msg { font: inherit; font-size: 13px; font-weight: 700; padding: 3px 10px; margin: 0 2px; border: 2px solid var(--ink); border-radius: 999px; background: var(--pink); color: var(--ink); cursor: pointer; box-shadow: 2px 2px 0 var(--ink); }
   ol.steps > li::before { content: counter(s); position: absolute; left: 16px; top: 14px; width: 34px; height: 34px; border-radius: 50%; background: var(--pink); color: var(--ink); border: 3px solid var(--ink); font-family: var(--display); font-size: 14px; display: grid; place-items: center; }
   ol.steps b { display: block; margin-bottom: 2px; }
   ol.steps span, ol.steps li > div { color: var(--soft); font-size: 15px; }
@@ -305,14 +306,11 @@
   </section>
 
   <section id="instalar">
-    <h2 data-es>En marcha en 5 minutos</h2><h2 data-en>Up and running in 5 minutes</h2>
-    <p class="sub" data-es>Una cuenta de Claude (también gratuita) y tu cuenta de Google.</p><p class="sub" data-en>A Claude account (free works) and your Google account.</p>
+    <h2 data-es>En marcha en 3 pasos</h2><h2 data-en>Up and running in 3 steps</h2>
+    <p class="sub" data-es>Solo una cuenta de Claude, también la gratuita. Se hace todo desde el móvil en un par de minutos.</p><p class="sub" data-en>Just a Claude account, free ones included. You can do it all from your phone in a couple of minutes.</p>
     <ol class="steps">
-      <li><b data-es>Cuenta de Claude</b><b data-en>Claude account</b><span data-es>Crea una en <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>. La gratuita sirve.</span><span data-en>Create one at <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>. The free one works.</span></li>
-      <li><b data-es>Conecta Google</b><b data-en>Connect Google</b><span data-es>Ajustes → Conectores: Drive, Calendar y Gmail.</span><span data-en>Settings → Connectors: Drive, Calendar and Gmail.</span></li>
-      <li><b data-es>Descarga Ivy</b><b data-en>Download Ivy</b><span data-es><a href="descargas/ivy-boy-bye.zip" download>ivy-boy-bye.zip</a>, un solo archivo.</span><span data-en><a href="descargas/ivy-boy-bye.zip" download>ivy-boy-bye.zip</a>, a single file.</span></li>
-      <li><b data-es>Instala Ivy con Claude</b><b data-en>Install it with Claude</b><span data-es>Adjunta el archivo en un chat nuevo y pega el mensaje que trae.</span><span data-en>Attach the file in a new chat and paste the message it includes.</span></li>
-      <li><b data-es>Acepta los permisos</b><b data-en>Allow access</b><span data-es>Lo que Ivy ve se queda en tu cuenta.</span><span data-en>What Ivy sees stays in your account.</span></li>
+      <li><b data-es>Descarga Ivy</b><b data-en>Download Ivy</b><span data-es><a href="descargas/ivy-boy-bye.zip" download>ivy-boy-bye.zip</a>, un solo archivo. No hace falta abrirlo.</span><span data-en><a href="descargas/ivy-boy-bye.zip" download>ivy-boy-bye.zip</a>, a single file. No need to open it.</span></li>
+      <li><b data-es>Pídele a Claude que la instale</b><b data-en>Ask Claude to install it</b><span data-es>En <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>, en un chat nuevo, adjunta el zip y escribe: <q>Instala Ivy siguiendo el INSTALAR.md de este zip.</q> <button type="button" class="copy-msg" onclick="navigator.clipboard?.writeText('Instala Ivy siguiendo el INSTALAR.md de este zip.').then(()=>{this.textContent='✓ Copiado'})">📋 Copiar</button> Claude la publica en tu cuenta y te da el enlace.</span><span data-en>At <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>, in a new chat, attach the zip and write: <q>Install Ivy following the INSTALAR.md in this zip.</q> <button type="button" class="copy-msg" onclick="navigator.clipboard?.writeText('Install Ivy following the INSTALAR.md in this zip.').then(()=>{this.textContent='✓ Copied'})">📋 Copy</button> Claude publishes it in your account and gives you the link.</span></li>
       <li><b data-es>Ivy en el móvil</b><b data-en>Ivy on your phone</b><span data-es>Guarda el enlace en la pantalla de inicio:</span><span data-en>Save the link to your home screen:</span>
         <div class="two" style="margin-top:8px">
           <div class="card"><b>iPhone</b><span data-es>En Safari: botón <b style="display:inline">Compartir</b> (cuadrado con flecha) → <b style="display:inline">Añadir a pantalla de inicio</b> → Añadir.</span><span data-en>In Safari: <b style="display:inline">Share</b> button (square with arrow) → <b style="display:inline">Add to Home Screen</b> → Add.</span></div>
@@ -326,7 +324,7 @@
           </div>
         </div>
 </li>
-      <li><b data-es>Empieza a escribir</b><b data-en>Start writing</b><span data-es>En inglés, a tu nivel.</span><span data-en>In English, at your level.</span></li>
+      <li><b data-es>Ábrela y escríbele</b><b data-en>Open it and write</b><span data-es>En inglés, a tu nivel. Acepta los permisos que pida. Cuando quieras que lleve tu despensa, tu dinero y tu correo, conecta Google en Claude → Ajustes → Conectores (Drive, Calendar y Gmail).</span><span data-en>In English, at your level. Allow what it asks for. When you want it to handle your pantry, money and email, connect Google in Claude → Settings → Connectors (Drive, Calendar and Gmail).</span></li>
     </ol>
   </section>
 
